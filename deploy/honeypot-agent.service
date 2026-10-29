@@ -1,0 +1,20 @@
+[Unit]
+Description=Own LLM agent loop (H6 stand-in): one unattended session
+After=network-online.target
+
+[Service]
+Type=oneshot
+# Own user, separate from the website's user (hp): if the website were compromised, it could not
+# read this process's environment, which holds the API key.
+User=hpagent
+Group=hpagent
+EnvironmentFile=/etc/honeypot.env
+EnvironmentFile=/etc/honeypot-agent.env
+Environment=HP_LOOP_DIR=/var/lib/honeypot-agent
+ExecStart=/usr/bin/python3 /opt/honeypot/tools/agent_loop.py run
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+ProtectProc=invisible
+ReadWritePaths=/var/lib/honeypot-agent

@@ -1,0 +1,70 @@
+# Caddy config for the honeypot. setup.sh replaces __DOMAIN__ and __ACME_EMAIL__.
+#
+# Caddy terminates TLS, then passes every request to the logging app on 127.0.0.1:8080.
+# Facts only Caddy knows (client IP, TLS details) travel in X-HP-* headers; the app moves
+# them into the "edge" part of each log line.
+#
+# NOT TESTED in the build environment (Caddy could not be installed there).
+# setup.sh runs `caddy validate` before using it. If validation fails on `log_credentials`,
+# delete that line: Caddy then masks Cookie and Authorization values in ITS OWN log only.
+# The app's log is unaffected.
+
+{
+	email __ACME_EMAIL__
+	# Keep certificates automatic, but let the http:// block below handle port 80 so those
+	# requests reach the app and are logged. (Caddy's own redirect answers 308 and logs nothing.)
+	auto_https disable_redirects
+	servers {
+		log_credentials
+	}
+}
+
+# HTTPS site.
+__DOMAIN__ {
+	log {
+		output file /var/log/caddy/access-https.jsonl {
+			roll_size 100MiB
+			roll_keep 20
+		}
+		format json
+	}
+	request_body {
+		max_size 1MB
+	}
+	header -Server
+	reverse_proxy 127.0.0.1:8080 {
+		header_up X-HP-Edge https
+		header_up X-HP-Client-IP {remote_host}
+		header_up X-HP-Client-Port {remote_port}
+		header_up X-HP-Orig-XFF {http.request.header.X-Forwarded-For}
+		header_up X-HP-Proto {http.request.proto}
+		header_up X-HP-TLS-Version {http.request.tls.version}
+		header_up X-HP-TLS-Cipher {http.request.tls.cipher_suite}
+		header_up X-HP-TLS-ALPN {http.request.tls.proto}
+		header_up X-HP-TLS-SNI {http.request.tls.server_name}
+		header_up X-HP-TLS-Resumed {http.request.tls.resumed}
+	}
+}
+
+# Plain HTTP on port 80, any host name. The app logs the request, then redirects requests
+# for our domain to HTTPS and answers 404 to everything else (scanners using the bare IP).
+http:// {
+	log {
+		output file /var/log/caddy/access-http80.jsonl {
+			roll_size 100MiB
+			roll_keep 20
+		}
+		format json
+	}
+	request_body {
+		max_size 1MB
+	}
+	header -Server
+	reverse_proxy 127.0.0.1:8080 {
+		header_up X-HP-Edge http80
+		header_up X-HP-Client-IP {remote_host}
+		header_up X-HP-Client-Port {remote_port}
+		header_up X-HP-Orig-XFF {http.request.header.X-Forwarded-For}
+		header_up X-HP-Proto {http.request.proto}
+	}
+}

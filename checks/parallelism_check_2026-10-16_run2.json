@@ -1,0 +1,263 @@
+{
+  "run": {
+    "tool": "hypothesis_parallelism_check",
+    "run": 2,
+    "template": "code/parallelism_check_prompts.py, parallelism_check_template(), unchanged",
+    "date": "2026-10-16",
+    "model": "Claude Sonnet, via a separate agent with no tools and no sight of the project discussion",
+    "note": "Revised wording after run 1 decisions. In H3 the signal codes (S7, S11, S12, S6, S9) were replaced by plain descriptions, because the checker does not see the signal table. Rendered prompt: parallelism_check_2026-10-16_run2.prompt.txt."
+  },
+  "input": {
+    "hypotheses": [
+      {
+        "id": "H0",
+        "statement": "Other, or cannot tell: the visit fits none of H1-H6, or the evidence does not separate them. Example: an AI browser whose actions fall between H1, H2 and H5."
+      },
+      {
+        "id": "H1",
+        "statement": "Human, ordinary browser: a person reading the site in their own browser, with no AI reading the page for them. A person who follows a lure by hand is H1."
+      },
+      {
+        "id": "H2",
+        "statement": "Human with in-browser AI: a person chose this page and opened it in their own browser; an AI feature or extension in that browser reads or summarises it. The page is fetched from the person's own device."
+      },
+      {
+        "id": "H3",
+        "statement": "Ordinary automation, no LLM: software with no language model acting on the page: crawlers, scanners, scrapers, uptime checks. Evidence against it: signs of an LLM acting on the page's content (following a hidden instruction that needs reasoning, a self-report, or pausing to check with a user), or human input events with human timing."
+      },
+      {
+        "id": "H4",
+        "statement": "AI company bulk crawler: an AI company's crawler collecting pages for training or a search index, not triggered by any one person's request. No model acts on the page during the visit."
+      },
+      {
+        "id": "H5",
+        "statement": "Agent directed by a person: an LLM acts during the visit on a task a person set in the same working session, with the result going back to that person. Includes pages fetched by an AI company's servers because a person asked a question."
+      },
+      {
+        "id": "H6",
+        "statement": "Autonomous agent: an LLM acts during the visit on a task no person set in that working session. Examples: a long-running loop with its own goal; an agent on a schedule whose individual results no person reads."
+      }
+    ]
+  },
+  "output": {
+    "hypothesis_profiles": [
+      {
+        "hypothesis_id": "H0",
+        "falsifiability": "no_falsifiers_stated",
+        "falsifiability_rationale": "The statement joins two different claims: the visit is a kind not covered by H1-H6, or the evidence is too weak to separate them. The second claim holds whenever evidence is thin, so nothing named in the text would count against it. Strong evidence for one of H1-H6 would count against it only by implication.",
+        "scope_qualifiers": [
+          {
+            "dimension": "actor type",
+            "commitment": "None. It is defined only by exclusion from H1-H6."
+          },
+          {
+            "dimension": "evidence quality",
+            "commitment": "Covers the case where evidence does not separate the other hypotheses."
+          }
+        ]
+      },
+      {
+        "hypothesis_id": "H1",
+        "falsifiability": "moderate",
+        "falsifiability_rationale": "Evidence against it would be signs of automation or of an AI reading the page. The key condition is that no AI reads the page, and that is a negative. An AI feature inside the person's own browser may leave no trace on the server. Without such traces, H1 is hard to rule out.",
+        "scope_qualifiers": [
+          {
+            "dimension": "who acts",
+            "commitment": "A person, in their own browser."
+          },
+          {
+            "dimension": "AI involvement",
+            "commitment": "None reading the page for them."
+          },
+          {
+            "dimension": "how the person arrived",
+            "commitment": "A person who follows a lure by hand still counts as H1."
+          }
+        ]
+      },
+      {
+        "hypothesis_id": "H2",
+        "falsifiability": "moderate",
+        "falsifiability_rationale": "Evidence against it would be fetches that do not come from the person's own device, or behaviour that is not human browsing. An in-browser AI that only reads or summarises may look the same as H1 from outside. That makes it hard to confirm and hard to rule out.",
+        "scope_qualifiers": [
+          {
+            "dimension": "who chose the page",
+            "commitment": "A person."
+          },
+          {
+            "dimension": "where the fetch comes from",
+            "commitment": "The person's own device and browser."
+          },
+          {
+            "dimension": "AI role",
+            "commitment": "An AI feature or extension reads or summarises the page. The text does not say whether it can also act on the page."
+          }
+        ]
+      },
+      {
+        "hypothesis_id": "H3",
+        "falsifiability": "high",
+        "falsifiability_rationale": "It is the only hypothesis that states what counts against it: signs of a language model acting on the page, such as following a hidden instruction that needs reasoning, a self-report, or pausing to check with a user, and human input events with human timing. Each of these can be checked.",
+        "scope_qualifiers": [
+          {
+            "dimension": "language model involvement",
+            "commitment": "None acting on the page."
+          },
+          {
+            "dimension": "software type",
+            "commitment": "Crawlers, scanners, scrapers, uptime checks."
+          },
+          {
+            "dimension": "human involvement",
+            "commitment": "No human input events with human timing."
+          },
+          {
+            "dimension": "operator and purpose",
+            "commitment": "Not stated."
+          }
+        ]
+      },
+      {
+        "hypothesis_id": "H4",
+        "falsifiability": "moderate",
+        "falsifiability_rationale": "Evidence against it would be a model acting on the page, a visit triggered by one person's request, or a fetcher that is not an AI company's. These are implied in the text, not listed. Whether the operator is an AI company can rest on a claimed identity, which may be unreliable.",
+        "scope_qualifiers": [
+          {
+            "dimension": "operator",
+            "commitment": "An AI company."
+          },
+          {
+            "dimension": "purpose",
+            "commitment": "Collecting pages for training or a search index."
+          },
+          {
+            "dimension": "trigger",
+            "commitment": "Not triggered by any one person's request."
+          },
+          {
+            "dimension": "scale",
+            "commitment": "Bulk collection."
+          },
+          {
+            "dimension": "language model involvement",
+            "commitment": "No model acts on the page during the visit."
+          }
+        ]
+      },
+      {
+        "hypothesis_id": "H5",
+        "falsifiability": "moderate",
+        "falsifiability_rationale": "Evidence against it would be no person-set task, or no result returning to a person. Both depend on facts outside the visit, so the visit alone may not show them. The edge of 'same working session' is not defined, which weakens any test.",
+        "scope_qualifiers": [
+          {
+            "dimension": "language model involvement",
+            "commitment": "A model acts during the visit."
+          },
+          {
+            "dimension": "who set the task",
+            "commitment": "A person, in the same working session."
+          },
+          {
+            "dimension": "where the result goes",
+            "commitment": "Back to that person."
+          },
+          {
+            "dimension": "where the fetch comes from",
+            "commitment": "Open. It explicitly includes an AI company's servers fetching because a person asked a question."
+          }
+        ]
+      },
+      {
+        "hypothesis_id": "H6",
+        "falsifiability": "low",
+        "falsifiability_rationale": "The main claim is a negative: no person set the task in that working session. That is rarely visible from a single visit. A person could have set the task earlier, set it up in a way the visit does not show, or read the results later, and the text gives no test for any of these. The examples (a loop with its own goal, a scheduled agent whose results nobody reads) cover many visit patterns.",
+        "scope_qualifiers": [
+          {
+            "dimension": "language model involvement",
+            "commitment": "A model acts during the visit."
+          },
+          {
+            "dimension": "who set the task",
+            "commitment": "No person, in that working session."
+          },
+          {
+            "dimension": "where the result goes",
+            "commitment": "Only in an example: results that no person reads. The main statement does not say."
+          },
+          {
+            "dimension": "duration or schedule",
+            "commitment": "Only in examples: a long-running loop or a scheduled agent."
+          }
+        ]
+      }
+    ],
+    "flags": [
+      {
+        "id": "F1",
+        "dimension": "who set the task, and the edge of 'same working session'",
+        "description": "H5 requires a person-set task in the same working session with the result going back to a person. H6 requires that no person set the task in that session, and only its example mentions results nobody reads. The two are not exact opposites. Suppose a person set up a recurring agent last week and reads its results. H5 fails on 'same session', and H6 fails if its example's 'nobody reads results' is taken as required. The case then falls to H0. 'Working session' has no stated length, so evidence about timing or repeat visits could be rated differently depending on how it is read.",
+        "hypotheses_involved": [
+          "H5",
+          "H6",
+          "H0"
+        ],
+        "resolution_needed": "What counts as the same working session, and does H6 require that no person reads the results? Where should an agent that a person set up earlier and whose results a person reads be placed?"
+      },
+      {
+        "id": "F2",
+        "dimension": "where the AI runs and whether it only reads or also acts",
+        "description": "H2 puts the fetch on the person's own device and gives the AI the role of reading or summarising. H5 has an AI that acts on a person's task and does not say where it runs, except that it includes AI company servers. An AI browser that acts for a person fits both. The H0 example admits this overlap. Evidence such as 'fetched from a home IP address with browser-like traffic and then followed a link' could be rated for either.",
+        "hypotheses_involved": [
+          "H2",
+          "H5",
+          "H0"
+        ],
+        "resolution_needed": "Is an AI agent running inside the person's own browser H2, H5, or a separate case? Does H2 allow the AI to act, or only to read and summarise?"
+      },
+      {
+        "id": "F3",
+        "dimension": "operator identity and purpose",
+        "description": "H3 and H4 both say no model acts on the page. They differ only in who runs the crawler (an AI company or not) and why (training or an index). H3 names evidence against it. H4 names none. The operator is usually judged from a claimed name or address range that can be faked. A crawler from a non-AI company that gathers pages for an AI company, or an AI company's tool that checks uptime, has no stated home.",
+        "hypotheses_involved": [
+          "H3",
+          "H4"
+        ],
+        "resolution_needed": "What evidence is accepted for deciding that a crawler belongs to an AI company? Where do crawlers run by third parties for AI companies, or AI company tools used for non-collection purposes, belong?"
+      },
+      {
+        "id": "F4",
+        "dimension": "falsifiability balance",
+        "description": "H0 is the hardest to disconfirm: it absorbs both 'none of the above' and 'evidence does not separate them', so any weak or mixed evidence fits it. H6 is next, because its core is a negative that one visit rarely shows. H1 is also hard to rule out when an in-browser AI leaves no trace. H3 is the only hypothesis with stated falsifiers, so it is easiest to disconfirm. If rated as written, H0, H6 and H1 could look stronger than H3 mainly because of how they are worded.",
+        "hypotheses_involved": [
+          "H0",
+          "H6",
+          "H1",
+          "H3"
+        ],
+        "resolution_needed": "Should H0 be rated by a different rule from H1-H6 (for example, used only when evidence is too thin to separate the rest)? Should H1, H2, H4, H5 and H6 each get stated evidence-against, as H3 has?"
+      },
+      {
+        "id": "F5",
+        "dimension": "separating a person alone from a person with an in-browser AI",
+        "description": "H1 requires that no AI reads the page. H2 says an AI feature reads it from the person's device. If the AI leaves no server-side trace, evidence for one is evidence for the other, and H1 would absorb every case where an AI is not visible. This could make H1 look more likely than H2 because of what the evidence can show, not because of what is true.",
+        "hypotheses_involved": [
+          "H1",
+          "H2"
+        ],
+        "resolution_needed": "What observable signs are meant to separate H1 from H2? If none exist, should they be rated as one hypothesis or should the limit be stated?"
+      },
+      {
+        "id": "F6",
+        "dimension": "how a person arrived (the lure clause)",
+        "description": "Only H1 says what to do with a person who follows a lure by hand. The set does not say where a person who passes the lure to an AI tool or extension belongs (H2 or H5), or define 'lure'. Evidence about lures could attach clearly to H1 and loosely to the others.",
+        "hypotheses_involved": [
+          "H1",
+          "H2",
+          "H5"
+        ],
+        "resolution_needed": "Should H2 and H5 also say how they treat a person who follows or passes on a lure, and is 'lure' defined for the rating step?"
+      }
+    ],
+    "overall_assessment": "asymmetry found — recommend revision before rating"
+  }
+}

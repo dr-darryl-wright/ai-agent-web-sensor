@@ -1,0 +1,47 @@
+{
+ "/": {
+  "status": 200,
+  "ctype": "text/html; charset=utf-8",
+  "body": "<!doctype html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>Notes - Field Notes</title>\n<link rel=\"stylesheet\" href=\"/static/site.css\">\n</head>\n<body>\n<header><img src=\"/static/mark.svg\" alt=\"\"><strong><a href=\"/\">Field Notes</a></strong></header>\n<main>\n<h1>Short technical notes</h1>\n<p>Small notes on web plumbing, written down so I can find them again.</p>\n<ul>\n<li><a href=\"/notes/http-caching\">HTTP caching in five headers</a></li>\n</ul>\n</main>\n<footer>Requests to this site are logged for research on automated web traffic. <a href=\"/privacy\">Privacy notice</a>.</footer>\n<script src=\"/static/b.js\"></script>\n</body>\n</html>\n"
+ },
+ "/notes/http-caching": {
+  "status": 200,
+  "ctype": "text/html; charset=utf-8",
+  "body": "<!doctype html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>HTTP caching in five headers - Field Notes</title>\n<link rel=\"stylesheet\" href=\"/static/site.css\">\n</head>\n<body>\n<header><img src=\"/static/mark.svg\" alt=\"\"><strong><a href=\"/\">Field Notes</a></strong></header>\n<main>\n<h1>HTTP caching in five headers</h1>\n<p><code>Cache-Control: max-age=N</code> says a response stays fresh for N seconds. Until then a cache may reuse it without asking the server.</p>\n<p><code>Cache-Control: no-cache</code> does not mean \"do not cache\". A cache may store the response but must check with the server before reusing it.</p>\n<p><code>Cache-Control: no-store</code> is the one that means \"do not keep a copy at all\".</p>\n<p><code>Cache-Control: private</code> allows the browser's own cache but not shared caches such as a CDN.</p>\n<p><code>ETag</code> gives a response a version tag. The client sends it back in <code>If-None-Match</code>; if nothing changed, the server answers <code>304 Not Modified</code> with no body.</p>\n</main>\n<footer>Requests to this site are logged for research on automated web traffic. <a href=\"/privacy\">Privacy notice</a>.</footer>\n<script src=\"/static/b.js\"></script>\n</body>\n</html>\n"
+ },
+ "/privacy": {
+  "status": 200,
+  "ctype": "text/html; charset=utf-8",
+  "body": "<!doctype html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>Privacy notice - Field Notes</title>\n<link rel=\"stylesheet\" href=\"/static/site.css\">\n</head>\n<body>\n<header><img src=\"/static/mark.svg\" alt=\"\"><strong><a href=\"/\">Field Notes</a></strong></header>\n<main>\n<h1>Privacy notice</h1>\n<p>This site is part of a research project on automated web traffic, including AI agents.</p>\n<p><strong>What is recorded.</strong> For every request: the time, IP address, the address requested, all request headers (including the browser or program name it reports), any data sent, and connection details such as the TLS version. A small script on each page reports whether scripts ran and whether the page was scrolled, the pointer moved or a key pressed. It does not read or store anything on your device. No cookies are set.</p>\n<p><strong>Why.</strong> To measure how people, ordinary bots and AI agents differ in the requests they make.</p>\n<p><strong>How long.</strong> Raw logs are kept until 31 January 2027 and then deleted. Anything published will have IP addresses removed, except addresses on AI companies' published crawler lists.</p>\n<p><strong>Contact.</strong> CONTACT-EMAIL-NOT-SET, for questions or to ask for records of your IP address to be deleted.</p>\n</main>\n<footer>Requests to this site are logged for research on automated web traffic. <a href=\"/privacy\">Privacy notice</a>.</footer>\n<script src=\"/static/b.js\"></script>\n</body>\n</html>\n"
+ },
+ "/robots.txt": {
+  "status": 200,
+  "ctype": "text/plain; charset=utf-8",
+  "body": "User-agent: *\nAllow: /\n\nSitemap: https://localhost/sitemap.xml\n"
+ },
+ "/sitemap.xml": {
+  "status": 200,
+  "ctype": "application/xml",
+  "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\"><url><loc>https://localhost/</loc></url><url><loc>https://localhost/notes/http-caching</loc></url><url><loc>https://localhost/privacy</loc></url></urlset>\n"
+ },
+ "/llms.txt": {
+  "status": 200,
+  "ctype": "text/plain; charset=utf-8",
+  "body": "# Field Notes\n\n> Short technical notes on web plumbing.\n\n- [HTTP caching in five headers](https://localhost/notes/http-caching)\n"
+ },
+ "/static/site.css": {
+  "status": 200,
+  "ctype": "text/css; charset=utf-8",
+  "body": "body{max-width:40rem;margin:2rem auto;padding:0 1rem;font:16px/1.6 Georgia,serif;color:#222;background:#fdfdfb}\nheader{display:flex;align-items:center;gap:.6rem}header img{width:28px;height:28px}\na{color:#2a5d8f}footer{margin-top:3rem;font-size:.85rem;color:#666}code{font-size:.9em}"
+ },
+ "/static/mark.svg": {
+  "status": 200,
+  "ctype": "image/svg+xml",
+  "body": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 28 28\"><rect x=\"3\" y=\"3\" width=\"22\" height=\"22\" rx=\"5\" fill=\"none\" stroke=\"#2a5d8f\" stroke-width=\"2\"/><path d=\"M8 18h12M8 13h12M8 8h7\" stroke=\"#2a5d8f\" stroke-width=\"2\"/></svg>"
+ },
+ "/static/b.js": {
+  "status": 200,
+  "ctype": "text/javascript; charset=utf-8",
+  "body": "(function(){var t0=Date.now(),sent={};\nfunction b(e){if(sent[e])return;sent[e]=1;var d=JSON.stringify({e:e,p:location.pathname,ms:Date.now()-t0});\ntry{if(navigator.sendBeacon&&navigator.sendBeacon('/api/b',d))return;}catch(x){}\ntry{fetch('/api/b',{method:'POST',body:d,keepalive:true});}catch(x){}}\nb('load');\naddEventListener('scroll',function(){b('scroll')},{passive:true});\naddEventListener('pointermove',function(){b('pointer')},{passive:true});\naddEventListener('keydown',function(){b('key')});\ndocument.addEventListener('visibilitychange',function(){if(document.visibilityState==='hidden')b('hidden')});})();"
+ }
+}

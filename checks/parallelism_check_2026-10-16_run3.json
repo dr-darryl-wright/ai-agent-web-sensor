@@ -1,0 +1,270 @@
+{
+  "run": {
+    "tool": "hypothesis_parallelism_check",
+    "run": 3,
+    "date": "2026-10-16",
+    "template": "Text of code/parallelism_check_prompts.py parallelism_check_template(), reproduced from the run 1 and run 2 renderings because the link to the user's computer was down; template text unchanged",
+    "model": "Claude Sonnet, via a separate agent with no tools and no sight of the project discussion",
+    "note": "Wording after run 2 decisions. The agent wrapped its JSON in a markdown code fence; the fence was removed. One flag carried a stray key 'hypothesis_id_note'; kept as returned. Rendered prompt: parallelism_check_2026-10-16_run3.prompt.txt."
+  },
+  "input": {
+    "hypotheses": [
+      {
+        "id": "H0",
+        "statement": "Other, or cannot tell. Not rated alongside H1-H6: assigned only when the visit fits none of them, or when no hypothesis leads by a margin fixed in advance from labelled data. Evidence against: a clear lead for one of H1-H6."
+      },
+      {
+        "id": "H1",
+        "statement": "Human, ordinary browser: a person reading the site in their own browser, with no AI reading the page for them. A person who follows a lure by hand is H1. Evidence against: no page script runs, no input events, machine-regular timing, a data-centre IP address, or an LLM acting on the page's content."
+      },
+      {
+        "id": "H2",
+        "statement": "Human with in-browser AI: a person opened this page in their own browser, and an AI feature or extension there only reads or summarises it; it does not navigate, click or follow instructions by itself. The page is fetched from the person's own device. Evidence against: a fetch not from the person's device (a data-centre IP address or a vendor's fetcher), or the AI navigating or following an instruction by itself. Known limit: the server may not be able to tell this from H1."
+      },
+      {
+        "id": "H3",
+        "statement": "Ordinary automation, no LLM: software with no language model acting on the page: crawlers, scanners, scrapers, uptime checks. Includes third-party crawlers working for AI companies, and AI company tools that do not collect pages. Evidence against: signs of an LLM acting on the page's content (following a hidden instruction that needs reasoning, a self-report, or pausing to check with a user), human input events with human timing, or a verified AI company crawler identity."
+      },
+      {
+        "id": "H4",
+        "statement": "AI company bulk crawler: a crawler whose AI company identity is verified (its IP address is in the vendor's published list, or it carries a valid cryptographic signature), collecting pages for training or a search index, not triggered by one person's request. No model acts on the page during the visit. Evidence against: identity not verified, a model acting on the page, or a fetch answering one person's request."
+      },
+      {
+        "id": "H5",
+        "statement": "Agent directed by a person: an LLM acts during the visit (navigates, follows instructions, or fetches for a model) on a task a person asked for, and the result answers that request. Wherever it runs: in the person's browser, or on an AI company's servers fetching because a person asked a question. Evidence against: no sign an LLM acted; signs the task comes from a standing goal or schedule (regular repeat visits, or a self-report of no person); no pause when asked to check with the user."
+      },
+      {
+        "id": "H6",
+        "statement": "Autonomous agent: an LLM acts during the visit on a task that comes from a standing goal or a schedule, not from a person's request for this task, whether or not someone reads the results later. Evidence against: no sign an LLM acted; a self-report of acting for a person now; a pause consistent with checking with a user; a single visit answering one person's request."
+      }
+    ]
+  },
+  "output": {
+    "hypothesis_profiles": [
+      {
+        "hypothesis_id": "H0",
+        "falsifiability": "low",
+        "falsifiability_rationale": "The only stated falsifier is 'a clear lead for one of H1-H6', and the size of the lead is left to 'a margin fixed in advance from labelled data' with no value given. 'Cannot tell' also fits any visit that has weak evidence, so thin evidence will always leave it standing. It is a residual, and it is the hardest to disconfirm until the margin is stated.",
+        "scope_qualifiers": [
+          {
+            "dimension": "population",
+            "commitment": "Visits that fit none of H1-H6, or where no hypothesis leads by the required margin."
+          },
+          {
+            "dimension": "decision threshold",
+            "commitment": "A margin fixed in advance from labelled data; the value is not stated here."
+          }
+        ]
+      },
+      {
+        "hypothesis_id": "H1",
+        "falsifiability": "moderate",
+        "falsifiability_rationale": "Five falsifiers are listed (no page script, no input events, machine-regular timing, data-centre IP address, an LLM acting on the page). Several are weak taken one at a time: a person on a VPN or a company network can show a data-centre IP address, and a person who only reads may produce few input events. The set is concrete but needs the signals combined.",
+        "scope_qualifiers": [
+          {
+            "dimension": "actor",
+            "commitment": "A person reading by their own hand, including a person who follows a lure by hand."
+          },
+          {
+            "dimension": "AI involvement",
+            "commitment": "None reading the page for them."
+          },
+          {
+            "dimension": "fetch origin",
+            "commitment": "The person's own browser (implied by the falsifiers; not stated outright)."
+          },
+          {
+            "dimension": "timing",
+            "commitment": "Human timing with input events."
+          }
+        ]
+      },
+      {
+        "hypothesis_id": "H2",
+        "falsifiability": "low",
+        "falsifiability_rationale": "The listed falsifiers (a fetch from a data-centre IP address or vendor fetcher, or the AI acting by itself) only move a visit into other hypotheses. Nothing observed on the server is stated as showing H2 itself. The hypothesis says the server may not be able to tell it from H1, so most evidence will not count against it.",
+        "scope_qualifiers": [
+          {
+            "dimension": "actor",
+            "commitment": "A person who opened the page in their own browser."
+          },
+          {
+            "dimension": "AI role",
+            "commitment": "Reads or summarises only; no navigating, clicking or following instructions by itself."
+          },
+          {
+            "dimension": "fetch origin",
+            "commitment": "The person's own device."
+          }
+        ]
+      },
+      {
+        "hypothesis_id": "H3",
+        "falsifiability": "moderate",
+        "falsifiability_rationale": "It is a claim that something is absent (no LLM), which is hard to show directly. It names three falsifiers: signs of an LLM acting, human input events with human timing, or a verified AI company crawler identity. The phrase 'AI company tools that do not collect pages' is loose, and a lack of LLM signs can pass as support for H3 when it only shows nothing was observed.",
+        "scope_qualifiers": [
+          {
+            "dimension": "AI involvement",
+            "commitment": "No language model acting on the page."
+          },
+          {
+            "dimension": "actor type",
+            "commitment": "Crawlers, scanners, scrapers, uptime checks, third-party crawlers working for AI companies, and AI company tools that do not collect pages."
+          },
+          {
+            "dimension": "identity",
+            "commitment": "Excludes a verified AI company crawler identity."
+          },
+          {
+            "dimension": "trigger, timing, fetch origin",
+            "commitment": "Not specified."
+          }
+        ]
+      },
+      {
+        "hypothesis_id": "H4",
+        "falsifiability": "high",
+        "falsifiability_rationale": "It states clear tests: the IP address is in the vendor's published list or the signature is valid, no model acts, and the fetch is not one person's request. Each can be checked, and failing any one counts against it.",
+        "scope_qualifiers": [
+          {
+            "dimension": "identity",
+            "commitment": "Verified AI company identity by IP list or cryptographic signature."
+          },
+          {
+            "dimension": "purpose",
+            "commitment": "Collecting pages for training or a search index."
+          },
+          {
+            "dimension": "trigger",
+            "commitment": "Not triggered by one person's request."
+          },
+          {
+            "dimension": "AI involvement",
+            "commitment": "No model acts on the page during the visit."
+          },
+          {
+            "dimension": "scale",
+            "commitment": "'Bulk', with no size or count given."
+          }
+        ]
+      },
+      {
+        "hypothesis_id": "H5",
+        "falsifiability": "moderate",
+        "falsifiability_rationale": "Falsifiers are stated: no sign an LLM acted, signs of a standing goal or schedule, and no pause when asked to check with the user. The pause test only works if the visit included such a request, so it is often unavailable. 'Fetches for a model' is broad enough to take in many vendor fetchers.",
+        "scope_qualifiers": [
+          {
+            "dimension": "AI involvement",
+            "commitment": "An LLM acts during the visit (navigates, follows instructions, or fetches for a model)."
+          },
+          {
+            "dimension": "task source",
+            "commitment": "A task a person asked for, and the result answers that request."
+          },
+          {
+            "dimension": "fetch origin",
+            "commitment": "Stated: the person's browser, or an AI company's servers."
+          },
+          {
+            "dimension": "repetition",
+            "commitment": "Regular repeat visits count against it."
+          }
+        ]
+      },
+      {
+        "hypothesis_id": "H6",
+        "falsifiability": "low",
+        "falsifiability_rationale": "Falsifiers are stated (no sign an LLM acted, a self-report of acting for a person, a pause consistent with checking with a user, a single visit answering one person's request). But nothing is stated that would show a standing goal or schedule from one visit, so it is mostly ruled out by H5 evidence and not supported on its own terms. The last falsifier ('a single visit answering one person's request') restates H5.",
+        "scope_qualifiers": [
+          {
+            "dimension": "AI involvement",
+            "commitment": "An LLM acts during the visit."
+          },
+          {
+            "dimension": "task source",
+            "commitment": "A standing goal or a schedule, not a person's request for this task."
+          },
+          {
+            "dimension": "downstream reader",
+            "commitment": "Does not matter whether anyone reads the results later."
+          },
+          {
+            "dimension": "fetch origin",
+            "commitment": "Not specified."
+          },
+          {
+            "dimension": "repetition",
+            "commitment": "Implied by 'schedule' but not stated as a requirement."
+          }
+        ]
+      }
+    ],
+    "flags": [
+      {
+        "id": "F1",
+        "dimension": "unit of analysis (one visit or a series of visits)",
+        "description": "H5 treats regular repeat visits as evidence against it. H6 relies on a standing goal or schedule, which is a pattern over time. H4 depends on 'bulk' collection. H1 and H3 mention timing regularity or are defined by repeating software. Yet the check is applied to a visit. For one visit, the pattern-based evidence has nowhere to attach for H6 or H4, while H5 has a single-visit falsifier ('a single visit answering one person's request') that H6 cannot be tested against on its own terms. This could push single-visit evidence toward H5 and H0.",
+        "hypotheses_involved": [
+          "H4",
+          "H5",
+          "H6",
+          "H3",
+          "H1"
+        ],
+        "resolution_needed": "Is each visit rated alone, or is the rating made for a visitor identity across several visits? If alone, what single-visit sign counts as showing a standing goal or schedule, and what counts as 'bulk' for H4?"
+      },
+      {
+        "hypothesis_id_note": "see id",
+        "id": "F2",
+        "dimension": "line between a model acting and a model only reading, and between a person's request and none",
+        "description": "H2 covers a person's AI feature that reads or summarises; H5 covers an LLM that acts on a task a person asked for. Both start from a person's request, and they differ only in 'acts' versus 'reads', which is not defined (does opening or fetching a page on a person's behalf count as acting?). H4 says no model acts during the visit, while H5 counts 'fetches for a model' as acting. A vendor fetcher with a verified identity that retrieves a page so a model can later use it fits H4 or H5 depending on how this is read. H3 also keys on following a hidden instruction that needs reasoning, with no shared definition of that act.",
+        "hypotheses_involved": [
+          "H2",
+          "H3",
+          "H4",
+          "H5"
+        ],
+        "resolution_needed": "What observable sign separates 'only reads' from 'acts' (for example following a hidden instruction, extra requests, navigating)? Does a fetch made so that a model can read the page count as a model acting during the visit?"
+      },
+      {
+        "id": "F3",
+        "dimension": "verified vendor identity and fetch origin",
+        "description": "H4 requires a verified identity, and H3 treats a verified identity as evidence against it. H5 allows an AI company's servers but says nothing about identity checks, and H6 says nothing about where it runs or about identity. A visit with a verified vendor identity and no sign of a model acting, where it is unclear whether the fetch was bulk or on request, is not placed by any hypothesis and falls to H0. Evidence about origin (data-centre IP address, vendor list, person's device) attaches clearly to H1, H2, H4 and H5 but not to H3 or H6.",
+        "hypotheses_involved": [
+          "H3",
+          "H4",
+          "H5",
+          "H6"
+        ],
+        "resolution_needed": "Should H5 and H6 say whether a verified vendor identity counts for or against them? How is a verified vendor fetch rated when nothing shows whether it was bulk collection or an answer to one person?"
+      },
+      {
+        "id": "F4",
+        "dimension": "falsifiability balance",
+        "description": "H0 and H2 are the hardest to disconfirm. H0's threshold has no value and 'cannot tell' fits any thin evidence. H2's only falsifiers move a visit to other hypotheses, and it admits it may look the same as H1. H6 is also weak on its own terms (see F1). H4 is the easiest to test. Left as written, H0, H2 and H1 could gain ground over time only because they are hard to disconfirm.",
+        "hypotheses_involved": [
+          "H0",
+          "H1",
+          "H2",
+          "H6"
+        ],
+        "resolution_needed": "What margin does H0 need, and can it be stated now? Is H2 meant to be separate from H1 for rating, or should evidence that cannot tell them apart be split between them or scored as one group?"
+      },
+      {
+        "id": "F5",
+        "dimension": "tests that need an active probe",
+        "description": "H5 and H6 list a pause when asked to check with a user and a self-report as falsifiers. These exist only if the page asked the visitor to check or to report. H1 to H4 have no matching test. When no probe was shown, the evidence cannot count against H5 or H6, yet they are still rated against H1 to H4, which lack the same exposure.",
+        "hypotheses_involved": [
+          "H5",
+          "H6",
+          "H1",
+          "H2",
+          "H3",
+          "H4"
+        ],
+        "resolution_needed": "Should a visit with no probe shown be rated with the pause and self-report falsifiers marked as not applicable, and should that be recorded so the other hypotheses are not favoured by default?"
+      }
+    ],
+    "overall_assessment": "asymmetry found — recommend revision before rating"
+  }
+}

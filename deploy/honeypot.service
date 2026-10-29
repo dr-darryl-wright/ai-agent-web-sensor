@@ -1,0 +1,23 @@
+[Unit]
+Description=Honeypot site (logs every request)
+After=network.target
+
+[Service]
+User=hp
+Group=hp
+EnvironmentFile=/etc/honeypot.env
+# Lures are off unless tools/lures_on.sh has written this file (the - makes it optional).
+EnvironmentFile=-/etc/honeypot-lures.env
+Environment=HP_PLACEMENTS=/opt/honeypot/lures/placements.csv
+WorkingDirectory=/opt/honeypot
+ExecStart=/opt/honeypot/venv/bin/uvicorn app:app --app-dir /opt/honeypot/app --host 127.0.0.1 --port 8080 --no-access-log --no-server-header --no-proxy-headers
+Restart=always
+RestartSec=2
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+ReadWritePaths=/var/lib/honeypot
+
+[Install]
+WantedBy=multi-user.target

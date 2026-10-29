@@ -1,0 +1,8 @@
+[Unit]
+Description=Seal finished days of honeypot logs into the hash chain
+
+[Service]
+Type=oneshot
+User=hp
+Group=hp
+ExecStart=/opt/honeypot/venv/bin/python /opt/honeypot/tools/seal_logs.py --log-dir /var/lib/honeypot/logs --seals /var/lib/honeypot/seals.jsonl

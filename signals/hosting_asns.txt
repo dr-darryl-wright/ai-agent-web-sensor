@@ -1,0 +1,45 @@
+# Network (ASN) list for signal S3 ("data-centre network").
+# Frozen with PREREGISTRATION.md. Drafted 16 October 2026.
+#
+# Drafted from memory on 16 Oct 2026; all 25 rows checked against the IPtoASN snapshot of
+# 19 Oct 2026, and two expected names corrected (AS20473, AS12876). Original note follows.
+# IMPORTANT: drafted FROM MEMORY. The IPtoASN download was blocked from both the build
+# workspace and the author's computer. Before freezing, run on the server:
+#   python3 tools/check_hosting_asns.py signals/hosting_asns.txt ip2asn-v4.tsv.gz
+# It prints the network name IPtoASN gives for each number and flags any that do not
+# contain the expected keyword. Fix or remove flagged rows before freezing.
+#
+# S3 takes three values, not two:
+#   hosting      - cloud and rented-server networks. Mostly automation.
+#   edge_proxy   - CDN, VPN and privacy-relay networks. Many PEOPLE appear here
+#                  (Cloudflare WARP, iCloud Private Relay), so it is NOT evidence of automation.
+#   other        - anything not listed: treated as ordinary home, mobile or business networks.
+#
+# Columns (tab-separated): ASN, category, expected keyword in the IPtoASN name, operator, note
+#
+# ASN	category	keyword	operator	note
+16509	hosting	AMAZON	Amazon Web Services
+14618	hosting	AMAZON	Amazon Web Services
+396982	hosting	GOOGLE	Google Cloud
+15169	hosting	GOOGLE	Google	Also carries Googlebot and other Google fetchers
+8075	hosting	MICROSOFT	Microsoft (incl. Azure)	Also carries some Microsoft office traffic: people can appear here
+31898	hosting	ORACLE	Oracle Cloud
+14061	hosting	DIGITALOCEAN	DigitalOcean
+24940	hosting	HETZNER	Hetzner Online
+16276	hosting	OVH	OVHcloud
+63949	hosting	AKAMAI	Akamai Connected Cloud (Linode)	Name may show as LINODE in older data
+20473	hosting	VULTR	Vultr	IPtoASN name AS-VULTR (checked 19 Oct 2026)
+12876	hosting	ONLINE	Scaleway	IPtoASN name Online SAS, Scaleway's former company name (checked 19 Oct 2026)
+51167	hosting	CONTABO	Contabo
+60781	hosting	LEASEWEB	Leaseweb Netherlands
+28753	hosting	LEASEWEB	Leaseweb Germany
+8560	hosting	IONOS	IONOS	Name may show as 1&1
+197540	hosting	NETCUP	netcup
+47583	hosting	HOSTINGER	Hostinger
+45102	hosting	ALIBABA	Alibaba Cloud
+132203	hosting	TENCENT	Tencent Cloud
+13335	edge_proxy	CLOUDFLARE	Cloudflare	Workers (automation) but also WARP and iCloud Private Relay users
+54113	edge_proxy	FASTLY	Fastly	iCloud Private Relay egress
+36183	edge_proxy	AKAMAI	Akamai	iCloud Private Relay egress
+20940	edge_proxy	AKAMAI	Akamai International
+9009	edge_proxy	M247	M247	Hosting company used by many commercial VPNs

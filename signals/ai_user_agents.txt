@@ -1,0 +1,65 @@
+# AI user-agent tokens for signal S1 ("declares an AI user agent").
+# Frozen with PREREGISTRATION.md. Drafted 16 October 2026; revised 19 October 2026 for version 2
+# of the pre-registration (Anthropic's list added; see its section 0).
+#
+# Matching: a session's User-Agent matches a row if it contains the token, ignoring case.
+# Columns (tab-separated): token, operator, kind, vendor IP list used for S2, source.
+#
+# kind:
+#   training     - collects pages to train models          -> H4 candidate if verified (S2/S4)
+#   search_index - collects pages for an AI search index    -> H4 candidate if verified
+#   user_fetch   - fetches a page because a person asked    -> H5 candidate
+#   user_agent   - an AI agent acting for a person          -> H5 candidate
+#   other_use    - AI company tool that does not collect pages (e.g. ad checks) -> H3
+#
+# Sources (all opened 16 October 2026):
+#   CF   = Cloudflare AI Crawl Control bot reference, updated 23 Apr 2026
+#          https://developers.cloudflare.com/ai-crawl-control/reference/bots/
+#   OAI  = OpenAI, Overview of OpenAI crawlers  https://developers.openai.com/api/docs/bots
+#   META = Meta, Web crawlers  https://developers.facebook.com/docs/sharing/webmasters/web-crawlers
+#   GA   = PPC Land on Google-Agent (added to Google's fetcher list 20 Mar 2026)
+#          https://ppc.land/google-agent-joins-the-crawler-list-as-ai-browsing-gets-an-official-identity/
+#   OTT  = Otterly AI crawlers reference guide, 22 Jan 2026  https://help.otterly.ai/ai-crawlers
+#   PPC  = PPC Land, user-agent strings article, 28 Jun 2026
+#   ANT  = Anthropic's crawler IP list, https://claude.com/crawling/bots.json (opened 19 Oct 2026;
+#          the file's creationTime is 2026-08-18). One list for all of Anthropic's agents: it does
+#          not separate crawling from on-request fetching
+#
+# NOT on this list, on purpose:
+#   - ChatGPT agent mode and other browser-based agents send an ordinary Chrome user agent.
+#     They are caught (if at all) by S4: a Signature-Agent header (ChatGPT agent signs requests
+#     per Cloudflare, Aug 2025; Google is testing the identity https://agent.bot.goog).
+#   - Robots.txt-only tokens that are never sent as a user agent: Google-Extended,
+#     Applebot-Extended.
+#   - Gemini-Deep-Research: its user agent "varies" (OTT); not matchable by token.
+#
+# token	operator	kind	S2 list	source
+GPTBot	OpenAI	training	https://openai.com/gptbot.json	OAI, CF
+OAI-SearchBot	OpenAI	search_index	https://openai.com/searchbot.json	OAI, CF
+ChatGPT-User	OpenAI	user_fetch	https://openai.com/chatgpt-user.json	OAI, CF
+OAI-AdsBot	OpenAI	other_use	https://openai.com/adsbot.json (not used for S2)	OAI
+ClaudeBot	Anthropic	training	https://claude.com/crawling/bots.json (all Anthropic agents together)	CF, OTT, ANT
+Claude-SearchBot	Anthropic	search_index	https://claude.com/crawling/bots.json (all Anthropic agents together)	CF, OTT, ANT
+Claude-User	Anthropic	user_fetch	https://claude.com/crawling/bots.json (all Anthropic agents together)	CF, OTT, ANT
+PerplexityBot	Perplexity	search_index	https://www.perplexity.com/perplexitybot.json	CF, OTT
+Perplexity-User	Perplexity	user_fetch	https://www.perplexity.com/perplexity-user.json	CF, OTT
+Google-Agent	Google	user_agent	https://developers.google.com/static/crawling/ipranges/user-triggered-agents.json	GA
+Google-CloudVertexBot	Google	training	none chosen	CF
+meta-externalagent	Meta	training	none published	META, CF
+meta-externalfetcher	Meta	user_fetch	none published	META, CF
+meta-webindexer	Meta	search_index	none published	META
+FacebookBot	Meta	training	none published	CF (not in Meta's own current list)
+Bytespider	ByteDance	training	none chosen	CF
+CCBot	Common Crawl	training	none chosen	CF
+Amazonbot	Amazon	training	none chosen	CF
+Applebot	Apple	search_index	none chosen	CF
+DuckAssistBot	DuckDuckGo	user_fetch	none chosen	CF
+MistralAI-User	Mistral	user_fetch	none chosen	CF
+#
+# General search crawlers: recorded for context, but S1 = false for them, because they are not
+# AI-specific. Googlebot is verified with googlebot.json for S2; its pages also feed Google's AI
+# products, so S2 cannot separate search use from AI use for Google.
+#
+# token	operator	kind	S2 list	source
+#~Googlebot	Google	general_search	https://developers.google.com/static/search/apis/ipranges/googlebot.json	OTT, CF
+#~bingbot	Microsoft	general_search	none chosen (Microsoft verifies through Bing Webmaster Tools)	OTT, CF

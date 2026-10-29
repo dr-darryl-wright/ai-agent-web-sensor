@@ -1,0 +1,108 @@
+You are checking whether a set of hypotheses is fairly
+structured before any evidence is rated against them. Read the
+instructions fully before starting.
+
+THE HYPOTHESES
+
+[
+  {
+    "id": "H1",
+    "statement": "Human, ordinary browser: a person reading the site, no AI reading the page for them."
+  },
+  {
+    "id": "H2",
+    "statement": "Human with AI assistance: a person chose this page; an AI feature reads or summarises it for them."
+  },
+  {
+    "id": "H3",
+    "statement": "Ordinary automation, no LLM: crawlers, scanners, scrapers, uptime checks."
+  },
+  {
+    "id": "H4",
+    "statement": "AI company bulk crawler: a training or search-index crawler; no model acts during the visit."
+  },
+  {
+    "id": "H5",
+    "statement": "Agent directed by a person: an LLM agent acting during the visit on a task a person set in the same working session, with the result going back to that person."
+  },
+  {
+    "id": "H6",
+    "statement": "Autonomous agent: an LLM agent acting during the visit with no person directing this task."
+  },
+  {
+    "id": "H7",
+    "statement": "Person probing or imitating: a person who hit a lure by hand, or sent a false agent user agent."
+  }
+]
+
+WHY THIS MATTERS
+
+A hypothesis worded vaguely enough can absorb almost any evidence as "not
+inconsistent" with it, which makes it look artificially strong later, not
+because it's more likely true, but because it's harder to disconfirm than
+its siblings. Separately, if one hypothesis specifies something (a time
+period, a population, a scale) that a sibling hypothesis leaves
+unspecified, evidence about that dimension will have somewhere to attach
+for one hypothesis and nowhere to attach for the other — an asymmetry in
+wording, not in what's actually true about the world.
+
+WHAT TO DO
+
+STEP 1 — PROFILE EACH HYPOTHESIS
+
+For each hypothesis, state:
+- falsifiability: low, moderate, high, or no_falsifiers_stated. Use the
+  last when the hypothesis as written names nothing that would count
+  against it -- a drafting gap, which is different from weak falsifiers.
+  Ask specifically: what would
+  count as evidence AGAINST this hypothesis? If it's hard to imagine
+  anything that would count against it, that's low falsifiability,
+  regardless of how plausible the hypothesis sounds.
+- falsifiability_rationale: why you rated it that way.
+- scope_qualifiers: every dimension this hypothesis explicitly commits to
+  — timing, population, magnitude, geography, or anything else relevant
+  to this domain. For each, state the dimension and what this hypothesis
+  says about it.
+
+STEP 2 — COMPARE ACROSS THE SET
+
+For every scope dimension that ANY hypothesis specifies, check the
+others: do they specify it too, leave it open for a clear and defensible
+reason, or leave it open in a way that looks like an oversight? Do not
+assume an omission is a mistake — some hypotheses genuinely should be
+broader than others. Flag it only when the asymmetry could plausibly
+change how evidence gets rated later, not just because the wording
+differs.
+
+STEP 3 — CHECK FALSIFIABILITY BALANCE
+
+Is any hypothesis in this set notably harder to disconfirm than the
+others? Do not let a hypothesis's plausibility or familiarity substitute
+for checking this directly — a common, intuitive-sounding explanation
+deserves exactly the same scrutiny as an unusual one.
+
+STEP 4 — ASSESS
+
+Roll up to one of:
+- "no material asymmetry found"
+- "asymmetry found — recommend revision before rating"
+- "asymmetry found — recommend human review"
+
+For every flag raised, state resolution_needed as an actual question for
+a human to answer — do not resolve it yourself by rewriting a hypothesis.
+That decision belongs to whoever owns the hypothesis set, not to this
+check.
+
+LANGUAGE
+
+Plain language throughout. No filler words like "real" or "genuine." Don't
+introduce a technical term and then explain it in plain words right after
+— just say the plain version directly.
+
+OUTPUT FORMAT
+
+Return only a JSON object with fields: hypothesis_profiles (array of
+{hypothesis_id, falsifiability, falsifiability_rationale,
+scope_qualifiers}), flags (array of {id, dimension, description,
+hypotheses_involved, resolution_needed}), overall_assessment. No prose
+before or after the object.

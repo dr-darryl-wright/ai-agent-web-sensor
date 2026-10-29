@@ -1,0 +1,8 @@
+placement,placed_utc,url_or_location,notes
+P1,2026-10-22T07:58:52Z,https://webplumbingnotes.net/ (visually hidden text),switched on by tools/lures_on.sh
+P2,2026-10-22T07:58:52Z,https://webplumbingnotes.net/ (HTML comment),switched on by tools/lures_on.sh
+P3,2026-10-22T07:58:52Z,https://webplumbingnotes.net/notes/http-caching (header image alt text),switched on by tools/lures_on.sh
+P4,2026-10-22T07:58:52Z,https://webplumbingnotes.net/llms.txt,switched on by tools/lures_on.sh
+P5,2026-10-22T07:58:52Z,https://webplumbingnotes.net/robots.txt (comment line),switched on by tools/lures_on.sh
+P6,2026-10-22T08:18:59Z,https://github.com/dr-darryl-wright/field-notes (README.md),README commit time from the GitHub API (committer date 2026-10-22T09:18:59+01:00)
+P7,2026-10-22T08:20:57Z,https://gist.github.com/dr-darryl-wright/3dda0e8092f84c62d101e6c5891d8353,gist created_at from the GitHub API; date -u run just after creation read 08:21:31Z

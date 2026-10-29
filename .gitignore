@@ -1,0 +1,14 @@
+# Raw logs, session tables, run notes and seals contain IP addresses (personal data). Never publish them.
+data/
+# Secrets and local environment files
+.env
+*.env
+*.pem
+*.key
+# Editor and system files
+.idea/
+.DS_Store
+__pycache__/
+.pytest_cache/
+# Generated per deployment
+lures/external/

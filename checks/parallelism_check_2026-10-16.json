@@ -1,0 +1,148 @@
+{
+  "run": {
+    "tool": "hypothesis_parallelism_check",
+    "template": "code/parallelism_check_prompts.py, parallelism_check_template(), unchanged",
+    "date": "2026-10-16",
+    "model": "Claude Sonnet, via a separate agent with no tools and no sight of the project discussion",
+    "note": "The agent was told: do not use tools or read files; work only from the text; reply with only the JSON object. The rendered prompt is in parallelism_check_2026-10-16.prompt.txt."
+  },
+  "input": {
+    "hypotheses": [
+      {"id": "H1", "statement": "Human, ordinary browser: a person reading the site, no AI reading the page for them."},
+      {"id": "H2", "statement": "Human with AI assistance: a person chose this page; an AI feature reads or summarises it for them."},
+      {"id": "H3", "statement": "Ordinary automation, no LLM: crawlers, scanners, scrapers, uptime checks."},
+      {"id": "H4", "statement": "AI company bulk crawler: a training or search-index crawler; no model acts during the visit."},
+      {"id": "H5", "statement": "Agent directed by a person: an LLM agent acting during the visit on a task a person set in the same working session, with the result going back to that person."},
+      {"id": "H6", "statement": "Autonomous agent: an LLM agent acting during the visit with no person directing this task."},
+      {"id": "H7", "statement": "Person probing or imitating: a person who hit a lure by hand, or sent a false agent user agent."}
+    ]
+  },
+  "output": {
+    "hypothesis_profiles": [
+      {
+        "hypothesis_id": "H1",
+        "falsifiability": "moderate",
+        "falsifiability_rationale": "Some evidence would count against it: machine-like request timing, no page rendering or script execution, a known bot address range, or an automation-tool user agent. But the hypothesis names none of these itself. A person using a privacy browser, a blocker, or a text-only browser could also look odd, so a weak or ambiguous trace does not clearly rule it out. 'No AI reading the page' is a negative claim that logs rarely show directly.",
+        "scope_qualifiers": [
+          {"dimension": "actor", "commitment": "a person"},
+          {"dimension": "AI involvement", "commitment": "none reading the page for the person"},
+          {"dimension": "client software", "commitment": "ordinary browser"},
+          {"dimension": "timing, volume, repetition", "commitment": "not stated"}
+        ]
+      },
+      {
+        "hypothesis_id": "H2",
+        "falsifiability": "low",
+        "falsifiability_rationale": "The hypothesis does not say how the AI feature fetches the page. If the AI company's servers fetch it, the visit looks like a bot visit. If a browser feature or extension reads it, the visit looks like an ordinary human visit. Almost any trace therefore fits: bot-like, human-like, with or without a model-company address range. Nothing in the wording names what would count against it. It also depends on a person's choice that logs do not show.",
+        "scope_qualifiers": [
+          {"dimension": "actor", "commitment": "a person who chose the page"},
+          {"dimension": "AI involvement", "commitment": "an AI feature reads or summarises the page; whether a model acts during the visit itself is not stated"},
+          {"dimension": "fetch route", "commitment": "not stated (browser-side or provider-side)"},
+          {"dimension": "timing, volume, repetition", "commitment": "not stated"}
+        ]
+      },
+      {
+        "hypothesis_id": "H3",
+        "falsifiability": "low",
+        "falsifiability_rationale": "It is a catch-all for any automated visitor that is not a model. Four different kinds of tool are listed (crawlers, scanners, scrapers, uptime checks), each with different traces. The main claim is that no LLM is involved, and a negative like that is hard to show from a visit log. Evidence of an LLM acting would count against it, but missing LLM evidence is weak support because many LLM agents look like scripts.",
+        "scope_qualifiers": [
+          {"dimension": "actor", "commitment": "software, in several named kinds"},
+          {"dimension": "AI involvement", "commitment": "no LLM"},
+          {"dimension": "person involvement", "commitment": "not stated"},
+          {"dimension": "timing, volume, repetition", "commitment": "not stated, though crawlers and scanners imply many requests and uptime checks imply regular intervals"}
+        ]
+      },
+      {
+        "hypothesis_id": "H4",
+        "falsifiability": "moderate",
+        "falsifiability_rationale": "It has usable falsifiers: an address range or user agent that does not match a published AI-company crawler, interaction beyond fetching pages, or behaviour that responds to the page's content. The claim that no model acts during the visit is a negative and hard to confirm. Search-index crawlers and fetchers that run when a user asks a question are not clearly separated, which loosens the wording.",
+        "scope_qualifiers": [
+          {"dimension": "actor", "commitment": "a training or search-index crawler run by an AI company"},
+          {"dimension": "AI involvement", "commitment": "no model acts during the visit"},
+          {"dimension": "person involvement", "commitment": "none during the visit (implied)"},
+          {"dimension": "scale", "commitment": "bulk (implied by the word bulk, but no number or rate is given)"},
+          {"dimension": "timing", "commitment": "not stated"}
+        ]
+      },
+      {
+        "hypothesis_id": "H5",
+        "falsifiability": "moderate",
+        "falsifiability_rationale": "Part of it can be tested: evidence that a model acts during the visit, such as behaviour that responds to the page. Evidence against includes bulk-crawler traces, no response to page content, or no sign of a task. The part about a person setting the task in the same session, with the result going back to them, cannot be seen from the visit alone, so evidence for or against it is thin.",
+        "scope_qualifiers": [
+          {"dimension": "actor", "commitment": "an LLM agent"},
+          {"dimension": "AI involvement", "commitment": "the model acts during the visit"},
+          {"dimension": "person involvement", "commitment": "a person set the task and receives the result"},
+          {"dimension": "timing", "commitment": "the task was set in the same working session as the visit"},
+          {"dimension": "volume, repetition", "commitment": "not stated"}
+        ]
+      },
+      {
+        "hypothesis_id": "H6",
+        "falsifiability": "low",
+        "falsifiability_rationale": "The defining claim is the absence of a directing person, which is a negative and cannot be shown from a visit alone. Any evidence of an LLM agent that does not also show a person could be read as support. It works as a leftover category for model-driven visits that cannot be tied to a person. Evidence against it would need to show a person directing the task, and that is the same thing that is hard to see for H5.",
+        "scope_qualifiers": [
+          {"dimension": "actor", "commitment": "an LLM agent"},
+          {"dimension": "AI involvement", "commitment": "the model acts during the visit"},
+          {"dimension": "person involvement", "commitment": "no person directing this task"},
+          {"dimension": "timing, volume, repetition", "commitment": "not stated"}
+        ]
+      },
+      {
+        "hypothesis_id": "H7",
+        "falsifiability": "low",
+        "falsifiability_rationale": "It joins two different things with 'or': a person hitting a lure by hand, and a false agent user agent sent by anyone, possibly by a script. Hand probing, a fake header from a script, and a fake header from a person all count as support, so a very wide range of traces fits. Intent (probing or imitating) is not visible in logs. A person testing by hand looks like a human visit (H1). A fake header sent by a script looks like ordinary automation (H3).",
+        "scope_qualifiers": [
+          {"dimension": "actor", "commitment": "a person, directly or through a tool that sends a false header"},
+          {"dimension": "AI involvement", "commitment": "none required; the agent claim is false in the imitation case"},
+          {"dimension": "intent", "commitment": "probing or imitating"},
+          {"dimension": "timing, volume, repetition", "commitment": "not stated"}
+        ]
+      }
+    ],
+    "flags": [
+      {
+        "id": "F1",
+        "dimension": "whether a model acts during the visit, and how the page is fetched",
+        "description": "H3, H4, H5 and H6 each say whether a model acts during the visit. H2 does not: it says only that an AI feature reads or summarises the page. A fetch made by an AI company's servers when a user asks a question fits H2, fits H5 if the fetcher counts as an agent, and may fit H4 if it comes from the same address ranges as the crawler. Evidence about the fetcher type has no clear place to attach, and H2 can take evidence that belongs to H4 or H5.",
+        "hypotheses_involved": ["H2", "H4", "H5"],
+        "resolution_needed": "Should a fetch made by an AI service on a user's request count as H2, H4 or H5, and does an AI feature that summarises a page count as a model acting during the visit?"
+      },
+      {
+        "id": "F2",
+        "dimension": "person direction and its observability",
+        "description": "H5 and H6 differ only on whether a person directed the task. H5 adds a same-session condition and a return of results to the person. H6 states only an absence. Evidence that a model acted during the visit supports both equally, and the distinguishing fact cannot be seen from a visit. H6 can become the default for any model-driven visit with no sign of a person, which makes it harder to disconfirm than H5. Evidence about timing or session links has a place in H5 and none in H6.",
+        "hypotheses_involved": ["H5", "H6"],
+        "resolution_needed": "What observable evidence would count as showing a person directed the task, and what would count as showing no person did? If none exists, should H5 and H6 be rated as one hypothesis or kept apart with an unknown option?"
+      },
+      {
+        "id": "F3",
+        "dimension": "overlap and mixed axes",
+        "description": "H7 describes intent and combines two cases. A person probing by hand looks the same as H1 in logs. A false agent user agent sent by a script looks the same as H3. The other hypotheses describe what kind of visitor it was. Evidence for H1 or H3 can also support H7, and H7's wide wording can absorb traces that fit nothing else.",
+        "hypotheses_involved": ["H1", "H3", "H7"],
+        "resolution_needed": "Should H7 be split into hand probing and false user agent, and what trace would separate each from H1 and H3?"
+      },
+      {
+        "id": "F4",
+        "dimension": "breadth of the non-LLM automation category",
+        "description": "H3 covers four kinds of tool and rests on a negative (no LLM). H4 covers one kind of crawler. Evidence of bot-like behaviour is therefore easy to place under H3 and harder to place under H4. H3 is notably harder to disconfirm than H1, H4 and H5.",
+        "hypotheses_involved": ["H3", "H4"],
+        "resolution_needed": "Should H3 be narrowed or split by tool type, and what evidence would count against H3 other than evidence of an LLM?"
+      },
+      {
+        "id": "F5",
+        "dimension": "timing, volume and repetition",
+        "description": "No hypothesis states a request rate, number of pages, repeat visits, or time pattern. H4 implies bulk and H5 states a same-session timing condition, but no figures are given. Evidence about rate, breadth or repeat visits has no stated threshold in any hypothesis. It could be placed wherever the rater prefers, and only H5 has a timing condition for evidence to attach to.",
+        "hypotheses_involved": ["H1", "H2", "H3", "H4", "H5", "H6", "H7"],
+        "resolution_needed": "Does the hypothesis owner want rate, volume or repeat-visit expectations written into any hypotheses, or should such evidence be treated as not decisive?"
+      },
+      {
+        "id": "F6",
+        "dimension": "coverage of the set",
+        "description": "The set has no option for an unknown or other visitor. A person using an AI browser that acts on the page, or a browser with an AI add-on, falls across H1, H2 and H5. Without an option for this, such evidence goes to whichever hypothesis has the loosest wording, mainly H2 and H7.",
+        "hypotheses_involved": ["H1", "H2", "H5", "H7"],
+        "resolution_needed": "Should the set include an other-or-unknown hypothesis, or are the seven meant to cover every case?"
+      }
+    ],
+    "overall_assessment": "asymmetry found — recommend revision before rating"
+  }
+}

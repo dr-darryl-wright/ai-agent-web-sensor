@@ -1,0 +1,12 @@
+[Unit]
+Description=Run the own agent loop twice a day, 22-31 October 2026 only
+
+[Timer]
+# 03:17 and 15:17 UTC each day from 22 to 31 October 2026, each delayed by up to 2 hours at random
+# so the sessions do not fall on a fixed clock time. Fires on no other dates.
+OnCalendar=2026-10-22..31 03,15:17:00 UTC
+RandomizedDelaySec=2h
+Persistent=false
+
+[Install]
+WantedBy=timers.target
