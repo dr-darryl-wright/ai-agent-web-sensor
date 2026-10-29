@@ -1,4 +1,4 @@
-# AI agent honeypot
+# AI agent web sensor
 
 A small website built to answer two questions from the server side:
 
