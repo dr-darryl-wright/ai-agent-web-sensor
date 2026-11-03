@@ -101,12 +101,65 @@ def split_on_tokens(sessions: list[hpa.Session], known: set[str]) -> tuple[list[
     return out, n_split
 
 
+IP_REPAIR_GAP = timedelta(seconds=60)
+
+
+def repair_missing_ip(reqs: list[dict], rep) -> list[dict]:
+    """D10 (a). Some requests reached the site through the edge server without the client-address
+    header (all were a browser's first `GET /` sent as TLS early data), so the logger fell back to
+    the local socket address 127.0.0.1. Each such request takes the address of the nearest request
+    within 60 seconds that has the same exact user agent and a real address (later one preferred).
+    Without this, the first request of a visit, which carries the run token, forms a session of its
+    own, split from the rest of the visit. Requests with no match keep 127.0.0.1 and are counted."""
+    rep.ip_repaired = 0
+    rep.ip_unrepaired = 0
+    reqs = sorted(reqs, key=lambda r: r["_ts"])
+    by_ua: dict[str, list[dict]] = {}
+    for r in reqs:
+        if not str(r["_ip"]).startswith("127."):
+            by_ua.setdefault(r["_ua"], []).append(r)
+    for r in reqs:
+        edge = r.get("edge") or {}
+        if str(r["_ip"]).startswith("127.") and not edge.get("client_ip") and edge.get("tls_version"):
+            near = [x for x in by_ua.get(r["_ua"], []) if abs(x["_ts"] - r["_ts"]) <= IP_REPAIR_GAP]
+            if near:
+                near.sort(key=lambda x: (x["_ts"] < r["_ts"], abs(x["_ts"] - r["_ts"])))
+                r["_ip"] = near[0]["_ip"]
+                r["_ip_repaired"] = True
+                rep.ip_repaired += 1
+            else:
+                rep.ip_unrepaired += 1
+    return reqs
+
+
+def drop_operator_sessions(sessions: list[hpa.Session], operator_ips: set[str], windows: list,
+                           known: set[str], rep) -> list[hpa.Session]:
+    """Section 3 exclusion of the operator's own visits, applied per session (D10 (c)). A session
+    from an operator address is kept if it carries a logged run token or overlaps a run window
+    (D1: scheduled-task windows are not used); otherwise all its requests are excluded and counted.
+    Applied after sessions are built so that a visit made from the operator's computer by an agent
+    (ChatGPT's scheduled task runs in a browser on that computer) stays whole."""
+    out = []
+    for s in sessions:
+        if s.ip in operator_ips:
+            has_token = any(request_token(q) in known for q in s.requests)
+            overlaps = any(a <= s.end and s.start <= b for a, b in windows)
+            if not (has_token or overlaps):
+                rep.operator += len(s.requests)
+                rep.kept -= len(s.requests)
+                continue
+        out.append(s)
+    return out
+
+
 def build_rows(log_dir: str, ctx: hpa.Context, operator_ips: set[str], windows: list,
                known_tokens: set[str]) -> tuple[list[dict], hpa.LoadReport, int]:
     """hpa.analyse, with the D6 split between building sessions and computing signals."""
     rep = hpa.LoadReport()
-    reqs = hpa.load_requests(log_dir, ctx.baseline_start, operator_ips, rep, windows)
+    reqs = hpa.load_requests(log_dir, ctx.baseline_start, set(), rep, windows)   # operator: below
+    reqs = repair_missing_ip(reqs, rep)
     sessions, n_split = split_on_tokens(hpa.build_sessions(reqs), known_tokens)
+    sessions = drop_operator_sessions(sessions, operator_ips, windows, known_tokens, rep)
     rows = [hpa.session_signals(s, ctx) for s in sessions]
     hpa.add_return_visits(rows)
     return rows, rep, n_split

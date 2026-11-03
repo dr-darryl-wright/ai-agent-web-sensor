@@ -7,12 +7,26 @@ A small website built to answer two questions from the server side:
 2. Can it tell an AI agent working for a person right now from one acting on a schedule or a
    standing goal?
 
-Data collection ran from 22 to 31 October 2026 on `webplumbingnotes.net`.
+Data collection ran from 18 to 31 October 2026 on `webplumbingnotes.net`; lures were live from 22 October.
+
+**Report:** [REPORT.md](REPORT.md) gives the findings, guidance for analysts reading server logs, and lessons for
+building a similar sensor. Screenshots of the site and its lures are in [`docs/screenshots/`](docs/screenshots/).
 
 ## Results
 
-*To be added after the held-out test (November 2026): accuracy on both questions, the hash of
-the rules that were tested, and what the signals could and could not separate.*
+Tested once on 47 labelled sessions held back for the purpose, with rules fixed beforehand
+(SHA-256 of `analysis/rules.py`: `69b7db41d9400de9e3a646ecf9bf0da96e52f5274d35e64874ccb83a47649f19`,
+[posted publicly](https://gist.github.com/dr-darryl-wright/d311041f80e554f5dd127e1f2e50e4da) on 1 November 2026):
+
+- **AI acting during the visit, or not:** the rules answered for 26 of 47 test sessions, and 21
+  of those answers were right (balanced accuracy 0.81). Counting "cannot tell" as wrong: 0.52.
+- **Working for a person, or on a schedule:** the server could not tell; 93% "cannot tell".
+- **Lures:** no AI product or agent followed any lure, in any mode; only people did, by hand. Most
+  products' saved answers show they saw the lures and chose not to act on them.
+- **Wild traffic:** 23 unknown sessions requested a lure link. All were automated crawlers
+  or link collectors; no wild AI agent was found.
+
+Numbers are in `results/`.
 
 ## How it works
 
@@ -49,6 +63,8 @@ during collection are listed at its end.
 | `lures/` | Lure placements and when each was placed |
 | `analysis/` | Session building and signals (`hpa.py`), labelling, split and scoring (`study.py`), the detection rules (`rules.py`), the runner (`run_study.py`), and the brief given to the rule writer (`rule_writer/`) |
 | `results/` | Published outputs, counts only |
+| `REPORT.md` | The report on the findings |
+| `docs/screenshots/` | The site's pages, page source, `robots.txt` and `llms.txt` as served with the lures on, lure text highlighted |
 | `checks/`, `FREEZE-*.txt` | The record that the protocol and code were fixed before data collection |
 | `tests/` | Automated tests |
 | `CONTROLLED_RUNS.md` | How the labelled visits were run |
@@ -74,4 +90,4 @@ code and documents; design decisions and checks were mine.
 
 ## Licence
 
-*To confirm: MIT for the code, CC BY 4.0 for the documents.*
+MIT (see `LICENSE`), covering the code and the documents in this repository.

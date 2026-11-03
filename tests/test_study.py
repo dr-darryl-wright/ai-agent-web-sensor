@@ -192,3 +192,35 @@ def test_train_packet_is_blind_and_checker_matches(tmp_path, monkeypatch):
     mine = study.score(rows, toy.classify, "train")
     assert res["T1"] == {k: mine["T1"][k] for k in res["T1"]}
     assert res["sessions"] == mine["sessions"]
+
+
+def _early(t, ua, query=""):
+    r = rec(t, "/", ua=ua, query=query)
+    r["edge"] = {"socket_peer": "127.0.0.1", "tls_version": "TLS1.3", "edge_name": "https"}
+    return r
+
+
+def test_d10_missing_ip_joins_its_visit(tmp_path):
+    a = T0
+    ua = "Mozilla/5.0 Chrome/152"
+    recs = [_early(a, ua, query="r=run00009"),
+            rec(a + timedelta(seconds=2), "/static/b.js", ip="31.0.0.9", ua=ua),
+            rec(a + timedelta(seconds=20), "/notes/http-caching", ip="31.0.0.9", ua=ua),
+            _early(a + timedelta(hours=3), "Lonely/1.0")]                      # no partner: stays 127.0.0.1
+    rows, counts, _ = build(tmp_path, recs, [("run00009", "human-browse", a, a + timedelta(minutes=2), "")])
+    lab = [r for r in rows if r["label_run"] == "run00009"]
+    assert len(lab) == 1 and lab[0]["ip"] == "31.0.0.9" and lab[0]["n_requests"] == 3
+    assert any(r["ip"] == "127.0.0.1" for r in rows)
+
+
+def test_d10_operator_sessions_kept_with_token_dropped_otherwise(tmp_path):
+    a = T0
+    ua = "Mozilla/5.0 Chrome/152 (agent browser)"
+    recs = [_early(a + timedelta(days=1), ua, query="r=sched009"),               # scheduled visit from
+            rec(a + timedelta(days=1, seconds=1), "/static/b.js", ip=OP, ua=ua),  # the operator's computer
+            rec(a + timedelta(days=1, seconds=5), "/api/b", ip=OP, ua=ua),
+            rec(a + timedelta(days=2), "/", ip=OP, ua="Safari")]                    # operator, no run
+    rows, _, _ = build(tmp_path, recs, [("sched009", "chatgpt-scheduled", a, None, "")])
+    lab = [r for r in rows if r["label_run"] == "sched009"]
+    assert len(lab) == 1 and lab[0]["n_requests"] == 3 and lab[0]["ip"] == OP
+    assert not any(r["ua"] == "Safari" for r in rows if "ua" in r) and len(rows) == 1

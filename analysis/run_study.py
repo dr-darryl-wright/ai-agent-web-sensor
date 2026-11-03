@@ -70,6 +70,7 @@ def load(a) -> tuple[list[dict], dict, str]:
     info = {"baseline_start": baseline, "reference": ref, "log_lines": rep.lines, "kept": rep.kept,
             "excluded": {"pilot": rep.before_start, "operator": rep.operator, "smoke": rep.smoke,
                          "capped": rep.capped, "unreadable": rep.bad_json},
+            "ip_repaired_D10": getattr(rep, "ip_repaired", 0), "ip_unrepaired_D10": getattr(rep, "ip_unrepaired", 0),
             "sessions": len(rows), "d6_splits": n_split, "labels": dict(counts), "runs_logged": len(runs),
             "runs_void": sum(1 for r in runs.values() if r["void"])}
     return rows, info, runs

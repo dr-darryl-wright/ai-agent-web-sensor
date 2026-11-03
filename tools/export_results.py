@@ -20,7 +20,7 @@ SRC = os.path.join(ROOT, "data", "analysis")
 DST = os.path.join(ROOT, "results")
 FILES = ["rules_freeze.json", "heldout_result.json", "heldout_opened.log", "A1_A6.json",
          "report_numbers.json"]
-PACKET_FILES = ["BRIEF.md", "MANIFEST.txt", "NOTES.md", "configurations.md"]
+PACKET_FILES = ["BRIEF.md", "MANIFEST.txt", "NOTES.md", "REVIEW.md", "rules.as_written.py", "configurations.md"]
 IPV4 = re.compile(r"\b(?:\d{1,3}\.){3}\d{1,3}\b")
 IPV6 = re.compile(r"\b(?:[0-9a-fA-F]{1,4}:){3,7}[0-9a-fA-F]{1,4}\b")
 ABS_PATH = re.compile(r'(?:/Users|/home|/var|/root|/tmp)/[^"\s,]*/([^"/\s,]+)')

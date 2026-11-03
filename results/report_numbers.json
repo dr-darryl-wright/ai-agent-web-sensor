@@ -1,0 +1,1178 @@
+{
+ "info": {
+  "baseline_start": "2026-10-19T18:46:56+00:00",
+  "reference": "/sessions/rcw-015h6cdxwmlwygekbdsqsgxr/mnt/Intelligence Infrastructure/honeypot/data/reference/2026-10-19T1845Z",
+  "log_lines": 74352,
+  "kept": 65961,
+  "excluded": {
+   "pilot": 8376,
+   "operator": 0,
+   "smoke": 15,
+   "capped": 0,
+   "unreadable": 0
+  },
+  "ip_repaired_D10": 25,
+  "ip_unrepaired_D10": 0,
+  "sessions": 11541,
+  "d6_splits": 3,
+  "labels": {
+   "unlabelled": 11434,
+   "labelled": 105,
+   "setup": 2
+  },
+  "runs_logged": 88,
+  "runs_void": 1
+ },
+ "A2_all": {
+  "H1": {
+   "sessions": 18,
+   "runs": 16,
+   "S1_ai_ua": {
+    "False": 0.83,
+    "True": 0.17
+   },
+   "S2_on_list": {
+    "False": 1.0
+   },
+   "false_declaration": {
+    "none": 0.83,
+    "ChatGPT-User": 0.17
+   },
+   "S3_network": {
+    "other": 1.0
+   },
+   "S4_signed": {
+    "False": 1.0
+   },
+   "S5_script_fetched": {
+    "True": 0.94,
+    "False": 0.06
+   },
+   "S5_beacon_load": {
+    "True": 0.94,
+    "False": 0.06
+   },
+   "S5_css": {
+    "True": 0.94,
+    "False": 0.06
+   },
+   "S5_image": {
+    "True": 0.94,
+    "False": 0.06
+   },
+   "S6_input_events": {
+    "pointer;scroll": 0.39,
+    "key;pointer": 0.28,
+    "pointer": 0.17,
+    "none": 0.11,
+    "key;pointer;scroll": 0.06
+   },
+   "S7_correct": {
+    "False": 0.78,
+    "True": 0.22
+   },
+   "S8_placements": {
+    "none": 0.72,
+    "P5": 0.17,
+    "P2": 0.06,
+    "P4": 0.06
+   },
+   "S10_robots_first": {
+    "False": 1.0
+   },
+   "S11_self_report": {
+    "none": 1.0
+   },
+   "S12_pause": {
+    "no_ok_request": 0.94,
+    "True": 0.06
+   },
+   "S13_return": {
+    "True": 0.89,
+    "False": 0.11
+   },
+   "S9_median_gap_s": 7.863
+  },
+  "H2": {
+   "sessions": 5,
+   "runs": 5,
+   "S1_ai_ua": {
+    "False": 1.0
+   },
+   "S2_on_list": {
+    "False": 1.0
+   },
+   "false_declaration": {
+    "none": 1.0
+   },
+   "S3_network": {
+    "other": 1.0
+   },
+   "S4_signed": {
+    "False": 1.0
+   },
+   "S5_script_fetched": {
+    "True": 1.0
+   },
+   "S5_beacon_load": {
+    "True": 1.0
+   },
+   "S5_css": {
+    "True": 1.0
+   },
+   "S5_image": {
+    "True": 1.0
+   },
+   "S6_input_events": {
+    "key;pointer": 1.0
+   },
+   "S7_correct": {
+    "False": 1.0
+   },
+   "S8_placements": {
+    "none": 1.0
+   },
+   "S10_robots_first": {
+    "False": 1.0
+   },
+   "S11_self_report": {
+    "none": 1.0
+   },
+   "S12_pause": {
+    "no_ok_request": 1.0
+   },
+   "S13_return": {
+    "True": 1.0
+   },
+   "S9_median_gap_s": null
+  },
+  "H3": {
+   "sessions": 15,
+   "runs": 15,
+   "S1_ai_ua": {
+    "False": 0.67,
+    "True": 0.33
+   },
+   "S2_on_list": {
+    "False": 1.0
+   },
+   "false_declaration": {
+    "none": 0.67,
+    "ChatGPT-User": 0.33
+   },
+   "S3_network": {
+    "other": 1.0
+   },
+   "S4_signed": {
+    "False": 1.0
+   },
+   "S5_script_fetched": {
+    "False": 1.0
+   },
+   "S5_beacon_load": {
+    "False": 1.0
+   },
+   "S5_css": {
+    "False": 1.0
+   },
+   "S5_image": {
+    "False": 1.0
+   },
+   "S6_input_events": {
+    "none": 1.0
+   },
+   "S7_correct": {
+    "False": 1.0
+   },
+   "S8_placements": {
+    "none": 1.0
+   },
+   "S10_robots_first": {
+    "False": 1.0
+   },
+   "S11_self_report": {
+    "none": 1.0
+   },
+   "S12_pause": {
+    "no_ok_request": 1.0
+   },
+   "S13_return": {
+    "False": 1.0
+   },
+   "S9_median_gap_s": 2.084
+  },
+  "H5": {
+   "sessions": 20,
+   "runs": 20,
+   "S1_ai_ua": {
+    "True": 0.5,
+    "False": 0.5
+   },
+   "S2_on_list": {
+    "True": 0.5,
+    "False": 0.5
+   },
+   "false_declaration": {
+    "none": 1.0
+   },
+   "S3_network": {
+    "hosting": 0.5,
+    "other": 0.5
+   },
+   "S4_signed": {
+    "False": 1.0
+   },
+   "S5_script_fetched": {
+    "False": 0.5,
+    "True": 0.5
+   },
+   "S5_beacon_load": {
+    "False": 0.5,
+    "True": 0.5
+   },
+   "S5_css": {
+    "False": 0.5,
+    "True": 0.5
+   },
+   "S5_image": {
+    "False": 0.5,
+    "True": 0.5
+   },
+   "S6_input_events": {
+    "none": 0.5,
+    "pointer": 0.5
+   },
+   "S7_correct": {
+    "False": 1.0
+   },
+   "S8_placements": {
+    "none": 1.0
+   },
+   "S10_robots_first": {
+    "False": 0.85,
+    "True": 0.15
+   },
+   "S11_self_report": {
+    "none": 1.0
+   },
+   "S12_pause": {
+    "no_ok_request": 1.0
+   },
+   "S13_return": {
+    "True": 0.7,
+    "False": 0.3
+   },
+   "S9_median_gap_s": 7.878
+  },
+  "H6": {
+   "sessions": 47,
+   "runs": 31,
+   "S1_ai_ua": {
+    "False": 0.81,
+    "True": 0.19
+   },
+   "S2_on_list": {
+    "False": 0.81,
+    "True": 0.19
+   },
+   "false_declaration": {
+    "none": 1.0
+   },
+   "S3_network": {
+    "hosting": 0.62,
+    "other": 0.38
+   },
+   "S4_signed": {
+    "False": 1.0
+   },
+   "S5_script_fetched": {
+    "False": 0.81,
+    "True": 0.19
+   },
+   "S5_beacon_load": {
+    "False": 0.81,
+    "True": 0.19
+   },
+   "S5_css": {
+    "False": 0.81,
+    "True": 0.19
+   },
+   "S5_image": {
+    "False": 0.81,
+    "True": 0.19
+   },
+   "S6_input_events": {
+    "none": 1.0
+   },
+   "S7_correct": {
+    "False": 1.0
+   },
+   "S8_placements": {
+    "none": 1.0
+   },
+   "S10_robots_first": {
+    "False": 0.91,
+    "True": 0.09
+   },
+   "S11_self_report": {
+    "none": 0.98,
+    "not_applicable": 0.02
+   },
+   "S12_pause": {
+    "no_ok_request": 0.98,
+    "not_applicable": 0.02
+   },
+   "S13_return": {
+    "True": 0.94,
+    "False": 0.06
+   },
+   "S9_median_gap_s": 3.744
+  }
+ },
+ "A2_by_config": {
+  "browser-ai-summary": {
+   "sessions": 5,
+   "runs": 5,
+   "S1_ai_ua": {
+    "False": 1.0
+   },
+   "S2_on_list": {
+    "False": 1.0
+   },
+   "false_declaration": {
+    "none": 1.0
+   },
+   "S3_network": {
+    "other": 1.0
+   },
+   "S4_signed": {
+    "False": 1.0
+   },
+   "S5_script_fetched": {
+    "True": 1.0
+   },
+   "S5_beacon_load": {
+    "True": 1.0
+   },
+   "S5_css": {
+    "True": 1.0
+   },
+   "S5_image": {
+    "True": 1.0
+   },
+   "S6_input_events": {
+    "key;pointer": 1.0
+   },
+   "S7_correct": {
+    "False": 1.0
+   },
+   "S8_placements": {
+    "none": 1.0
+   },
+   "S10_robots_first": {
+    "False": 1.0
+   },
+   "S11_self_report": {
+    "none": 1.0
+   },
+   "S12_pause": {
+    "no_ok_request": 1.0
+   },
+   "S13_return": {
+    "True": 1.0
+   },
+   "S9_median_gap_s": null
+  },
+  "chatgpt-agent": {
+   "sessions": 5,
+   "runs": 5,
+   "S1_ai_ua": {
+    "False": 1.0
+   },
+   "S2_on_list": {
+    "False": 1.0
+   },
+   "false_declaration": {
+    "none": 1.0
+   },
+   "S3_network": {
+    "other": 1.0
+   },
+   "S4_signed": {
+    "False": 1.0
+   },
+   "S5_script_fetched": {
+    "True": 1.0
+   },
+   "S5_beacon_load": {
+    "True": 1.0
+   },
+   "S5_css": {
+    "True": 1.0
+   },
+   "S5_image": {
+    "True": 1.0
+   },
+   "S6_input_events": {
+    "pointer": 1.0
+   },
+   "S7_correct": {
+    "False": 1.0
+   },
+   "S8_placements": {
+    "none": 1.0
+   },
+   "S10_robots_first": {
+    "False": 1.0
+   },
+   "S11_self_report": {
+    "none": 1.0
+   },
+   "S12_pause": {
+    "no_ok_request": 1.0
+   },
+   "S13_return": {
+    "True": 1.0
+   },
+   "S9_median_gap_s": 7.878
+  },
+  "chatgpt-scheduled": {
+   "sessions": 9,
+   "runs": 1,
+   "S1_ai_ua": {
+    "False": 1.0
+   },
+   "S2_on_list": {
+    "False": 1.0
+   },
+   "false_declaration": {
+    "none": 1.0
+   },
+   "S3_network": {
+    "other": 1.0
+   },
+   "S4_signed": {
+    "False": 1.0
+   },
+   "S5_script_fetched": {
+    "True": 1.0
+   },
+   "S5_beacon_load": {
+    "True": 1.0
+   },
+   "S5_css": {
+    "True": 1.0
+   },
+   "S5_image": {
+    "True": 1.0
+   },
+   "S6_input_events": {
+    "none": 1.0
+   },
+   "S7_correct": {
+    "False": 1.0
+   },
+   "S8_placements": {
+    "none": 1.0
+   },
+   "S10_robots_first": {
+    "False": 1.0
+   },
+   "S11_self_report": {
+    "none": 1.0
+   },
+   "S12_pause": {
+    "no_ok_request": 1.0
+   },
+   "S13_return": {
+    "True": 1.0
+   },
+   "S9_median_gap_s": null
+  },
+  "chatgpt-search": {
+   "sessions": 5,
+   "runs": 5,
+   "S1_ai_ua": {
+    "True": 1.0
+   },
+   "S2_on_list": {
+    "True": 1.0
+   },
+   "false_declaration": {
+    "none": 1.0
+   },
+   "S3_network": {
+    "hosting": 1.0
+   },
+   "S4_signed": {
+    "False": 1.0
+   },
+   "S5_script_fetched": {
+    "False": 1.0
+   },
+   "S5_beacon_load": {
+    "False": 1.0
+   },
+   "S5_css": {
+    "False": 1.0
+   },
+   "S5_image": {
+    "False": 1.0
+   },
+   "S6_input_events": {
+    "none": 1.0
+   },
+   "S7_correct": {
+    "False": 1.0
+   },
+   "S8_placements": {
+    "none": 1.0
+   },
+   "S10_robots_first": {
+    "False": 1.0
+   },
+   "S11_self_report": {
+    "none": 1.0
+   },
+   "S12_pause": {
+    "no_ok_request": 1.0
+   },
+   "S13_return": {
+    "False": 0.8,
+    "True": 0.2
+   },
+   "S9_median_gap_s": 2.798
+  },
+  "claude-browser-agent": {
+   "sessions": 5,
+   "runs": 5,
+   "S1_ai_ua": {
+    "False": 1.0
+   },
+   "S2_on_list": {
+    "False": 1.0
+   },
+   "false_declaration": {
+    "none": 1.0
+   },
+   "S3_network": {
+    "other": 1.0
+   },
+   "S4_signed": {
+    "False": 1.0
+   },
+   "S5_script_fetched": {
+    "True": 1.0
+   },
+   "S5_beacon_load": {
+    "True": 1.0
+   },
+   "S5_css": {
+    "True": 1.0
+   },
+   "S5_image": {
+    "True": 1.0
+   },
+   "S6_input_events": {
+    "pointer": 1.0
+   },
+   "S7_correct": {
+    "False": 1.0
+   },
+   "S8_placements": {
+    "none": 1.0
+   },
+   "S10_robots_first": {
+    "False": 1.0
+   },
+   "S11_self_report": {
+    "none": 1.0
+   },
+   "S12_pause": {
+    "no_ok_request": 1.0
+   },
+   "S13_return": {
+    "True": 1.0
+   },
+   "S9_median_gap_s": 9.668
+  },
+  "claude-scheduled": {
+   "sessions": 9,
+   "runs": 1,
+   "S1_ai_ua": {
+    "True": 1.0
+   },
+   "S2_on_list": {
+    "True": 1.0
+   },
+   "false_declaration": {
+    "none": 1.0
+   },
+   "S3_network": {
+    "hosting": 1.0
+   },
+   "S4_signed": {
+    "False": 1.0
+   },
+   "S5_script_fetched": {
+    "False": 1.0
+   },
+   "S5_beacon_load": {
+    "False": 1.0
+   },
+   "S5_css": {
+    "False": 1.0
+   },
+   "S5_image": {
+    "False": 1.0
+   },
+   "S6_input_events": {
+    "none": 1.0
+   },
+   "S7_correct": {
+    "False": 1.0
+   },
+   "S8_placements": {
+    "none": 1.0
+   },
+   "S10_robots_first": {
+    "False": 0.56,
+    "True": 0.44
+   },
+   "S11_self_report": {
+    "none": 1.0
+   },
+   "S12_pause": {
+    "no_ok_request": 1.0
+   },
+   "S13_return": {
+    "True": 0.67,
+    "False": 0.33
+   },
+   "S9_median_gap_s": null
+  },
+  "claude-web-fetch": {
+   "sessions": 5,
+   "runs": 5,
+   "S1_ai_ua": {
+    "True": 1.0
+   },
+   "S2_on_list": {
+    "True": 1.0
+   },
+   "false_declaration": {
+    "none": 1.0
+   },
+   "S3_network": {
+    "hosting": 1.0
+   },
+   "S4_signed": {
+    "False": 1.0
+   },
+   "S5_script_fetched": {
+    "False": 1.0
+   },
+   "S5_beacon_load": {
+    "False": 1.0
+   },
+   "S5_css": {
+    "False": 1.0
+   },
+   "S5_image": {
+    "False": 1.0
+   },
+   "S6_input_events": {
+    "none": 1.0
+   },
+   "S7_correct": {
+    "False": 1.0
+   },
+   "S8_placements": {
+    "none": 1.0
+   },
+   "S10_robots_first": {
+    "True": 0.6,
+    "False": 0.4
+   },
+   "S11_self_report": {
+    "none": 1.0
+   },
+   "S12_pause": {
+    "no_ok_request": 1.0
+   },
+   "S13_return": {
+    "True": 0.6,
+    "False": 0.4
+   },
+   "S9_median_gap_s": null
+  },
+  "curl-fetch": {
+   "sessions": 5,
+   "runs": 5,
+   "S1_ai_ua": {
+    "False": 1.0
+   },
+   "S2_on_list": {
+    "False": 1.0
+   },
+   "false_declaration": {
+    "none": 1.0
+   },
+   "S3_network": {
+    "other": 1.0
+   },
+   "S4_signed": {
+    "False": 1.0
+   },
+   "S5_script_fetched": {
+    "False": 1.0
+   },
+   "S5_beacon_load": {
+    "False": 1.0
+   },
+   "S5_css": {
+    "False": 1.0
+   },
+   "S5_image": {
+    "False": 1.0
+   },
+   "S6_input_events": {
+    "none": 1.0
+   },
+   "S7_correct": {
+    "False": 1.0
+   },
+   "S8_placements": {
+    "none": 1.0
+   },
+   "S10_robots_first": {
+    "False": 1.0
+   },
+   "S11_self_report": {
+    "none": 1.0
+   },
+   "S12_pause": {
+    "no_ok_request": 1.0
+   },
+   "S13_return": {
+    "False": 1.0
+   },
+   "S9_median_gap_s": null
+  },
+  "false-ua-browser": {
+   "sessions": 3,
+   "runs": 3,
+   "S1_ai_ua": {
+    "True": 1.0
+   },
+   "S2_on_list": {
+    "False": 1.0
+   },
+   "false_declaration": {
+    "ChatGPT-User": 1.0
+   },
+   "S3_network": {
+    "other": 1.0
+   },
+   "S4_signed": {
+    "False": 1.0
+   },
+   "S5_script_fetched": {
+    "True": 1.0
+   },
+   "S5_beacon_load": {
+    "True": 1.0
+   },
+   "S5_css": {
+    "True": 1.0
+   },
+   "S5_image": {
+    "True": 1.0
+   },
+   "S6_input_events": {
+    "key;pointer": 1.0
+   },
+   "S7_correct": {
+    "False": 1.0
+   },
+   "S8_placements": {
+    "none": 1.0
+   },
+   "S10_robots_first": {
+    "False": 1.0
+   },
+   "S11_self_report": {
+    "none": 1.0
+   },
+   "S12_pause": {
+    "no_ok_request": 1.0
+   },
+   "S13_return": {
+    "True": 1.0
+   },
+   "S9_median_gap_s": 3.739
+  },
+  "false-ua-script": {
+   "sessions": 5,
+   "runs": 5,
+   "S1_ai_ua": {
+    "True": 1.0
+   },
+   "S2_on_list": {
+    "False": 1.0
+   },
+   "false_declaration": {
+    "ChatGPT-User": 1.0
+   },
+   "S3_network": {
+    "other": 1.0
+   },
+   "S4_signed": {
+    "False": 1.0
+   },
+   "S5_script_fetched": {
+    "False": 1.0
+   },
+   "S5_beacon_load": {
+    "False": 1.0
+   },
+   "S5_css": {
+    "False": 1.0
+   },
+   "S5_image": {
+    "False": 1.0
+   },
+   "S6_input_events": {
+    "none": 1.0
+   },
+   "S7_correct": {
+    "False": 1.0
+   },
+   "S8_placements": {
+    "none": 1.0
+   },
+   "S10_robots_first": {
+    "False": 1.0
+   },
+   "S11_self_report": {
+    "none": 1.0
+   },
+   "S12_pause": {
+    "no_ok_request": 1.0
+   },
+   "S13_return": {
+    "False": 1.0
+   },
+   "S9_median_gap_s": 2.09
+  },
+  "human-browse": {
+   "sessions": 10,
+   "runs": 8,
+   "S1_ai_ua": {
+    "False": 1.0
+   },
+   "S2_on_list": {
+    "False": 1.0
+   },
+   "false_declaration": {
+    "none": 1.0
+   },
+   "S3_network": {
+    "other": 1.0
+   },
+   "S4_signed": {
+    "False": 1.0
+   },
+   "S5_script_fetched": {
+    "True": 0.9,
+    "False": 0.1
+   },
+   "S5_beacon_load": {
+    "True": 0.9,
+    "False": 0.1
+   },
+   "S5_css": {
+    "True": 0.9,
+    "False": 0.1
+   },
+   "S5_image": {
+    "True": 0.9,
+    "False": 0.1
+   },
+   "S6_input_events": {
+    "pointer;scroll": 0.6,
+    "none": 0.2,
+    "key;pointer;scroll": 0.1,
+    "pointer": 0.1
+   },
+   "S7_correct": {
+    "False": 1.0
+   },
+   "S8_placements": {
+    "none": 1.0
+   },
+   "S10_robots_first": {
+    "False": 1.0
+   },
+   "S11_self_report": {
+    "none": 1.0
+   },
+   "S12_pause": {
+    "no_ok_request": 1.0
+   },
+   "S13_return": {
+    "True": 0.8,
+    "False": 0.2
+   },
+   "S9_median_gap_s": 4.321
+  },
+  "human-lure": {
+   "sessions": 5,
+   "runs": 5,
+   "S1_ai_ua": {
+    "False": 1.0
+   },
+   "S2_on_list": {
+    "False": 1.0
+   },
+   "false_declaration": {
+    "none": 1.0
+   },
+   "S3_network": {
+    "other": 1.0
+   },
+   "S4_signed": {
+    "False": 1.0
+   },
+   "S5_script_fetched": {
+    "True": 1.0
+   },
+   "S5_beacon_load": {
+    "True": 1.0
+   },
+   "S5_css": {
+    "True": 1.0
+   },
+   "S5_image": {
+    "True": 1.0
+   },
+   "S6_input_events": {
+    "key;pointer": 0.4,
+    "pointer": 0.4,
+    "pointer;scroll": 0.2
+   },
+   "S7_correct": {
+    "True": 0.8,
+    "False": 0.2
+   },
+   "S8_placements": {
+    "P5": 0.6,
+    "P2": 0.2,
+    "P4": 0.2
+   },
+   "S10_robots_first": {
+    "False": 1.0
+   },
+   "S11_self_report": {
+    "none": 1.0
+   },
+   "S12_pause": {
+    "no_ok_request": 0.8,
+    "True": 0.2
+   },
+   "S13_return": {
+    "True": 1.0
+   },
+   "S9_median_gap_s": 17.35
+  },
+  "own-loop": {
+   "sessions": 20,
+   "runs": 20,
+   "S1_ai_ua": {
+    "False": 1.0
+   },
+   "S2_on_list": {
+    "False": 1.0
+   },
+   "false_declaration": {
+    "none": 1.0
+   },
+   "S3_network": {
+    "hosting": 1.0
+   },
+   "S4_signed": {
+    "False": 1.0
+   },
+   "S5_script_fetched": {
+    "False": 1.0
+   },
+   "S5_beacon_load": {
+    "False": 1.0
+   },
+   "S5_css": {
+    "False": 1.0
+   },
+   "S5_image": {
+    "False": 1.0
+   },
+   "S6_input_events": {
+    "none": 1.0
+   },
+   "S7_correct": {
+    "False": 1.0
+   },
+   "S8_placements": {
+    "none": 1.0
+   },
+   "S10_robots_first": {
+    "False": 1.0
+   },
+   "S11_self_report": {
+    "none": 0.95,
+    "not_applicable": 0.05
+   },
+   "S12_pause": {
+    "no_ok_request": 0.95,
+    "not_applicable": 0.05
+   },
+   "S13_return": {
+    "True": 1.0
+   },
+   "S9_median_gap_s": null
+  },
+  "own-loop-local": {
+   "sessions": 9,
+   "runs": 9,
+   "S1_ai_ua": {
+    "False": 1.0
+   },
+   "S2_on_list": {
+    "False": 1.0
+   },
+   "false_declaration": {
+    "none": 1.0
+   },
+   "S3_network": {
+    "other": 1.0
+   },
+   "S4_signed": {
+    "False": 1.0
+   },
+   "S5_script_fetched": {
+    "False": 1.0
+   },
+   "S5_beacon_load": {
+    "False": 1.0
+   },
+   "S5_css": {
+    "False": 1.0
+   },
+   "S5_image": {
+    "False": 1.0
+   },
+   "S6_input_events": {
+    "none": 1.0
+   },
+   "S7_correct": {
+    "False": 1.0
+   },
+   "S8_placements": {
+    "none": 1.0
+   },
+   "S10_robots_first": {
+    "False": 1.0
+   },
+   "S11_self_report": {
+    "none": 1.0
+   },
+   "S12_pause": {
+    "no_ok_request": 1.0
+   },
+   "S13_return": {
+    "True": 1.0
+   },
+   "S9_median_gap_s": 3.744
+  },
+  "scraper": {
+   "sessions": 5,
+   "runs": 5,
+   "S1_ai_ua": {
+    "False": 1.0
+   },
+   "S2_on_list": {
+    "False": 1.0
+   },
+   "false_declaration": {
+    "none": 1.0
+   },
+   "S3_network": {
+    "other": 1.0
+   },
+   "S4_signed": {
+    "False": 1.0
+   },
+   "S5_script_fetched": {
+    "False": 1.0
+   },
+   "S5_beacon_load": {
+    "False": 1.0
+   },
+   "S5_css": {
+    "False": 1.0
+   },
+   "S5_image": {
+    "False": 1.0
+   },
+   "S6_input_events": {
+    "none": 1.0
+   },
+   "S7_correct": {
+    "False": 1.0
+   },
+   "S8_placements": {
+    "none": 1.0
+   },
+   "S10_robots_first": {
+    "False": 1.0
+   },
+   "S11_self_report": {
+    "none": 1.0
+   },
+   "S12_pause": {
+    "no_ok_request": 1.0
+   },
+   "S13_return": {
+    "False": 1.0
+   },
+   "S9_median_gap_s": 0.299
+  }
+ },
+ "predictions": {
+  "P1": {
+   "baseline_sessions": 2385,
+   "classified_H3": 683,
+   "holds": false,
+   "counted": false
+  },
+  "P2": {
+   "configurations": 9,
+   "followed_L1": [],
+   "holds": false
+  },
+  "P3": {
+   "holds": true
+  },
+  "P6": {
+   "wild_candidates": 5,
+   "holds": true
+  },
+  "P4": {
+   "T1_ba": 0.523,
+   "holds": false
+  },
+  "P5": {
+   "T2_ba": 0.125,
+   "holds": true
+  }
+ }
+}

@@ -1,0 +1,60 @@
+{
+ "half": "heldout",
+ "sessions": 47,
+ "T1": {
+  "n": 47,
+  "abstentions": 21,
+  "abstention_rate": 0.447,
+  "ba_abstain_wrong": 0.523,
+  "ba_abstain_excluded": 0.81,
+  "classes_present": [
+   "llm",
+   "not_llm"
+  ]
+ },
+ "T1_confusion": {
+  "llm": {
+   "abstain": 20,
+   "llm": 10,
+   "not_llm": 2
+  },
+  "not_llm": {
+   "not_llm": 11,
+   "llm": 3,
+   "abstain": 1
+  }
+ },
+ "T2": {
+  "n": 30,
+  "abstentions": 28,
+  "abstention_rate": 0.933,
+  "ba_abstain_wrong": 0.125,
+  "ba_abstain_excluded": 1.0,
+  "classes_present": [
+   "H5",
+   "H6"
+  ]
+ },
+ "T2_confusion": {
+  "H6": {
+   "abstain": 22
+  },
+  "H5": {
+   "abstain": 6,
+   "H5": 2
+  }
+ },
+ "T2_without_own_loops": {
+  "n": 16,
+  "abstentions": 14,
+  "abstention_rate": 0.875,
+  "ba_abstain_wrong": 0.125,
+  "ba_abstain_excluded": 1.0,
+  "classes_present": [
+   "H5",
+   "H6"
+  ]
+ },
+ "opened_utc": "2026-11-01T20:08:58+00:00",
+ "rules_hash": "69b7db41d9400de9e3a646ecf9bf0da96e52f5274d35e64874ccb83a47649f19"
+}

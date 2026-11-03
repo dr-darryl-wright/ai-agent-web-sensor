@@ -1,0 +1,65 @@
+{
+ "frozen_utc": "2026-11-01T19:54:40+00:00",
+ "hashes": {
+  "rules.py": "69b7db41d9400de9e3a646ecf9bf0da96e52f5274d35e64874ccb83a47649f19",
+  "study.py": "752a6ae0eaff81532c458454c6fcc5cf43aceab99b1f4f071d8004907fe4df6c",
+  "hpa.py": "4b34ddcee11c836fb2cbaecd543ddbbb112f9df451d0341f219402105c6269bb"
+ },
+ "train_score": {
+  "half": "train",
+  "sessions": 58,
+  "T1": {
+   "n": 58,
+   "abstentions": 23,
+   "abstention_rate": 0.397,
+   "ba_abstain_wrong": 0.647,
+   "ba_abstain_excluded": 0.884,
+   "classes_present": [
+    "llm",
+    "not_llm"
+   ]
+  },
+  "T1_confusion": {
+   "not_llm": {
+    "not_llm": 17,
+    "llm": 1
+   },
+   "llm": {
+    "abstain": 23,
+    "llm": 14,
+    "not_llm": 3
+   }
+  },
+  "T2": {
+   "n": 37,
+   "abstentions": 35,
+   "abstention_rate": 0.946,
+   "ba_abstain_wrong": 0.083,
+   "ba_abstain_excluded": 1.0,
+   "classes_present": [
+    "H5",
+    "H6"
+   ]
+  },
+  "T2_confusion": {
+   "H6": {
+    "abstain": 25
+   },
+   "H5": {
+    "abstain": 10,
+    "H5": 2
+   }
+  },
+  "T2_without_own_loops": {
+   "n": 22,
+   "abstentions": 20,
+   "abstention_rate": 0.909,
+   "ba_abstain_wrong": 0.083,
+   "ba_abstain_excluded": 1.0,
+   "classes_present": [
+    "H5",
+    "H6"
+   ]
+  }
+ }
+}
