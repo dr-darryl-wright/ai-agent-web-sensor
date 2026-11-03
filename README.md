@@ -67,14 +67,6 @@ Deploying the site: see the comments at the top of `deploy/setup.sh` and `deploy
 The analysis (`python3 analysis/run_study.py prepare | train | freeze | evaluate | describe |
 report`) needs the request logs, which are not published.
 
-## What is not published, and why
-
-- **Request logs, session tables and run notes** (`data/`, excluded by `.gitignore`). They hold
-  visitors' IP addresses, which are personal data. Results are published as counts only.
-- **The names of hijacked websites.** Several of the busiest visitors were attacking the site
-  from servers that appear to belong to ordinary websites whose owners are probably victims. The
-  hosting provider was told; the sites are not named here.
-
 ## How it was built
 
 Designed and run by Darryl Wright. Claude (Anthropic) was used as an engineering assistant for
